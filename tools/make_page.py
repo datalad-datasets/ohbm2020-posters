@@ -54,4 +54,4 @@ assert len(recs) > 2000
 print("Read {} records".format(len(recs)))
 
 import json
-(thisfile.parent.parent / "table.json").write_text(json.dumps({'abstracts': recs}))
+(thisfile.parent.parent / "table.json").write_text(json.dumps({'abstracts': recs}, indent=2))
