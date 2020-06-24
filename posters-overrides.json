@@ -2955,6 +2955,12 @@
   },
   {
    "number": 1057
+   "title": "AxonDeepSeg: Automatic Myelin and Axon Segmentation Using Deep Learning",
+   "institution": "Montreal Heart Institute",
+   "presenter": "Mathieu Boudreau",
+   "categories": "Modeling and Analysis Methods<br>Segmentation and Parcellation",
+   "videochat": "<a href=\"https://meet.jit.si/ohbm2020-1057\" target=\"_ohbm2020-1057\">jitsi:ohbm2020-1057</a>",
+   "pdf": "https://cdn-akamai.6connex.com//645/1827//ohbm2020_boudreau_FINAL_15921677822526191.pdf"
   },
   {
    "number": 1058
