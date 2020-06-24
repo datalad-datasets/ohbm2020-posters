@@ -470,10 +470,18 @@ function directory(jQuery) {
       {data: "number", title: "#", width: "5%"},
       {data: "title", title: "Title", className: "dt-left", width: "35%"},
       {data: "presenter", title: "Presenter", className: "dt-center", width: "20%"},
-      {data: "categories", title: "Categories", className: "dt-left", width: "20%"},
-      {data: "url", title: "URL", className: "dt-left", width: "20%"},
+      {data: "categories", title: "Categories", className: "dt-left", width: "10%"},
+      {data: "videochat", title: "Video Chat", className: "dt-left", width: "18%"},
+      {data: "pdf", title: "PDF", className: "dt-left", width: "8%"},
     ],
-//    createdRow: function(row, data, index) {
+    createdRow: function(row, data, index) {
+        if (data.pdf === '') {
+            pdf = '<a href="https://github.com/datalad-datasets/ohbm2020-posters/pulls">[ADD]</a>';
+        } else {
+            pdf = '<a href' + data.pdf + '">PDF</a>';
+        }
+        jQuery('td', row).eq(5).html(pdf);
+    }
 //      if (data.name === '..')
 //        parent = true;
 //
@@ -531,7 +539,7 @@ function directory(jQuery) {
 //      jQuery('#directory_filter').prepend('<span class="breadcrumb">' +
 //                                          bread2crumbs(jQuery, md5).join(' / ') +
 //                                          '</span>');
-//    }
+//   }
   });
   localStorage['ntCache'] = JSON.stringify(ntCache);
   return table;

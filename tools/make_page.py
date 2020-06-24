@@ -48,7 +48,8 @@ for line in infile.read_text().splitlines():
         rec['presenter'] = '{} {}'.format(rec.pop('presenter_first'), rec.pop('presenter_last'))
         rec['categories'] = '{}<br>{}'.format(rec.pop('cat1'), rec.pop('cat2'))
         url = 'ohbm2020-{number}'.format(**rec)
-        rec['url'] = f'<a href="https://meet.jit.si/{url}" target="_{url}">{url}</a>'
+        rec['videochat'] = f'<a href="https://meet.jit.si/{url}" target="_{url}">jitsi:{url}</a>'
+        rec['pdf'] = ''
         recs.append(rec)
         overrides.append({'number': rec['number']})
     except ValueError:
