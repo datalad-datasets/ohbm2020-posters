@@ -436,7 +436,7 @@ function getNodeType(jQuery, md5, url) {
  */
 function directory(jQuery) {
   var parent = false;
-  var md5Url = "table.json";
+  var md5Url = "posters.json";
 
   if (!urlExists(md5Url)) {
     errorMsg(
