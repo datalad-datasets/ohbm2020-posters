@@ -69,5 +69,5 @@ for orig, override in zip(recs['posters'], overrides['posters']):
 
 # NOTE:overrides should not be regenerated as is, so we will run ones and comment it out
 for struct, filename in ((recs, 'posters.json'),): #, (overrides, 'posters-overrides.json')):
-    (thisfile.parent.parent / filename).write_text(
-        json.dumps(struct, indent=1))
+    Path.write_text(thisfile.parent.parent / filename,
+        json.dumps(struct, indent=1, ensure_ascii=False))
