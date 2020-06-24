@@ -35,6 +35,7 @@ thisfile = Path(__file__)
 infile = thisfile.parent.parent / 'OHBM 2020 Poster Numbering - AbstractsAdHocReport_2015_20200.tsv'
 
 recs = []
+overrides = []
 for line in infile.read_text().splitlines():
     if not line.strip():
         continue
@@ -48,10 +49,14 @@ for line in infile.read_text().splitlines():
         url = 'ohbm2020-{number}'.format(**rec)
         rec['url'] = f'<a href="https://meet.jit.si/{url}" target="_{url}">{url}</a>'
         recs.append(rec)
+        overrides.append({'number': rec['number']})
     except ValueError:
         print(f"skip: {line}")
 assert len(recs) > 2000
 print("Read {} records".format(len(recs)))
 
 import json
-(thisfile.parent.parent / "table.json").write_text(json.dumps({'abstracts': recs}, indent=1))
+# NOTE:overrides should not be regenerated as is, so we will run ones and comment it out
+for struct, filename in ((recs, 'posters.json'), (overrides, 'posters-overrides.json')):
+    (thisfile.parent.parent / filename).write_text(
+        json.dumps({'posters': struct}, indent=1))

@@ -463,7 +463,7 @@ function directory(jQuery) {
     paging: false,  // ensure scrolling instead of pages
     ajax: {         // specify url to get json from ajax
       url: md5Url,
-      dataSrc: "abstracts"
+      dataSrc: "posters"
     },
     //order: [[6, "desc"], [0, 'asc']],
     columns: [      // select columns and their names from json
