@@ -30,6 +30,7 @@ __author__ = 'yoh'
 __license__ = 'MIT'
 
 from pathlib import Path
+import json
 
 thisfile = Path(__file__)
 infile = thisfile.parent.parent / 'OHBM 2020 Poster Numbering - AbstractsAdHocReport_2015_20200.tsv'
@@ -55,8 +56,17 @@ for line in infile.read_text().splitlines():
 assert len(recs) > 2000
 print("Read {} records".format(len(recs)))
 
-import json
+recs = {'posters': recs}
+overrides = {'posters': overrides}
+
+overrides_file = thisfile.parent.parent / 'posters-overrides.json'
+assert overrides_file.exists()  # must be there now
+overrides = json.loads(overrides_file.read_text())
+for orig, override in zip(recs['posters'], overrides['posters']):
+    assert orig['number'] == override['number']
+    orig.update(override)
+
 # NOTE:overrides should not be regenerated as is, so we will run ones and comment it out
-for struct, filename in ((recs, 'posters.json'), (overrides, 'posters-overrides.json')):
+for struct, filename in ((recs, 'posters.json'),): #, (overrides, 'posters-overrides.json')):
     (thisfile.parent.parent / filename).write_text(
-        json.dumps({'posters': struct}, indent=1))
+        json.dumps(struct, indent=1))
