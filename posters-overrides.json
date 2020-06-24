@@ -5262,7 +5262,9 @@
    "number": 1859
   },
   {
-   "number": 1860
+   "number": 1860,
+   "videochat": "<a href=\"https://meet.jit.si/DeepPrimateBrainShapes" target=\"_DeepPrimateBrainShapes\">jitsi:DeepPrimateBrainShapes</a>",
+   "pdf": "https://github.com/katjaq/brainscapes/blob/master/img/Heuer-Toro_BrainScapes_OHBM_2020.pdf"
   },
   {
    "number": 1861
@@ -5364,9 +5366,7 @@
    "number": 1894
   },
   {
-   "number": 1895,
-   "videochat": "<a href=\"https://meet.jit.si/bids-derivatives\" target=\"_bids-derivatives\">jitsi:bids-derivatives</a>",
-   "pdf": "https://cdn-akamai.6connex.com/645/1827/poster_15922429379118925.pdf"
+   "number": 1895
   },
   {
    "number": 1896
