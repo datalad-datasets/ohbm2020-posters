@@ -41,8 +41,6 @@ This "website" is a crude lobotomization of the basic DataLad datasets navigator
 `datalad create-sibling --with-ui` creates for you. https://datasets.datalad.org is one
 of such websites.
 
-Also, if you check git history, you will see that we had used [datalad run](http://handbook.datalad.org/en/latest
-/basics/101-109-rerun.html) to annotate how `table.json` was produced. So you can use `datalad rerun _produce_table
-.json` (where `_produce_table.json` is just a git tag) to regenerate `table.json` happen you either modified script
- or original `.tsv`. 
+Also, if you check git history, you will see that we had used [datalad run](http://handbook.datalad.org/en/latest/basics/101-109-rerun.html) to annotate how `posters.json` was produced.
+So you can use `datalad rerun _produce_posters.json` (where `_produce_posters.json` is just a git tag) to regenerate `posters.json` happen you either modified script or original `.tsv`. 
 
