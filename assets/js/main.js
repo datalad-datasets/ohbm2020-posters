@@ -451,12 +451,14 @@ function directory(jQuery) {
 
   // add HOWTO install
     jQuery('#installation').prepend(
-        '<P style="margin-top: 0px;">To install this dataset in your current directory use</P>' +
-        '<span class="command">datalad install URL </span>' +
-        '<P style="font-size: 90%;">To install with all sub-datasets add <span class="command-option">-r</span>.' +
-        '    To get all the data add <span class="command-option">-g</span>.' +
-        '    To get data in parallel add <span class="command-option">-JN</span>, where <span class="command-option">N</span> would be the number of parallel downloads. ' +
-        '<P style="font-size: 90%;">For more information about DataLad and installation instructions visit <a href="http://datalad.org">datalad.org</a></P>'
+        '<P style="margin-top: 0px;">This is a very crude attempt to help OHBM 2020 participants to establish centralized registry of Jitsi audio-video conference rooms per each poster.</P>' +
+        '<P style="margin-top: 0px;">Just browse or quickly search by word/name.</P>' +
+        '<P style="margin-top: 0px;">For every poster there is a dedicated Jitsi room, which would open in a "dedicated" new window/tab.</P>' +
+        '<P style="font-size: 90%;">Jitsi is a free and open source solution, with peer-to-peer to communication.  I believe it is what <a href="https://gather.town/SNvy8sSrEU73UIDF/hbmhack">gather.town</a> (which you might have loved by now) uses as underlying technology.</p>' +
+        '<P style="font-size: 90%;">Such decentralization allows Jitsi to generously "host" virtually any number of virtual rooms.</P>'+
+        '<P style="font-size: 90%;">Presenters - I would recommend to install Jitsi browser for your browser (Crome works best for me)</P>'+
+        '<P style="font-size: 90%;">Note: Unicode characters were "lost" in the original spreadsheet, not my fault .</P>'+
+        '<P> Feel welcome to send PRs for <a href="https://github.com/datalad-datasets/ohbm2020-posters" target="_github">https://github.com/datalad-datasets/ohbm2020-posters</a> since I know no JS</p>'
         );
 
   var table = jQuery('#directory').dataTable({
