@@ -2954,7 +2954,7 @@
    "number": 1056
   },
   {
-   "number": 1057
+   "number": 1057,
    "title": "AxonDeepSeg: Automatic Myelin and Axon Segmentation Using Deep Learning",
    "institution": "Montreal Heart Institute",
    "presenter": "Mathieu Boudreau",
