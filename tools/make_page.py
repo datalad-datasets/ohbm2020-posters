@@ -39,7 +39,7 @@ dlfile = thisfile.parent.parent / 'poster_downloads_matches.csv'
 
 urls = dict()
 for line in csv.DictReader(dlfile.read_text().splitlines(), quotechar='"', delimiter=','):
-    if line['number'] in [None, '']:
+    if line['number'] in [None, ''] or '.comet:' in line['url']:
         continue
     urls[int(line['number'])] = line['url']
 
