@@ -14,6 +14,21 @@
         "code",
         "maintenance"
       ]
+    },
+    {
+      "login": "yarikoptic",
+      "name": "Yaroslav Halchenko",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/39889?v=4",
+      "profile": "http://www.onerussian.com",
+      "contributions": [
+        "code",
+        "infra",
+        "maintenance",
+        "ideas",
+        "design",
+        "projectManagement",
+        "talk"
+      ]
     }
   ],
   "contributorsPerLine": 7,
