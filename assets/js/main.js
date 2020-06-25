@@ -451,11 +451,10 @@ function directory(jQuery) {
 
   // add HOWTO install
     jQuery('#installation').prepend(
-        '<P style="margin-top: 0px;">This is a very crude attempt to help OHBM 2020 participants to establish centralized registry of Jitsi audio-video conference rooms per each poster.</P>' +
-        '<P style="margin-top: 0px;">Just browse or quickly search by word/name.</P>' +
+        '<P style="margin-top: 0px;">Centralized registry of Jitsi audio-video conference rooms per each poster or software demo of OHBM 2020.</P>' +
+        '<P style="margin-top: 0px;">Just browse or quickly search by words etc.</P>' +
         '<P style="margin-top: 0px;">For every poster there is a dedicated Jitsi room, which would open in a "dedicated" new window/tab.</P>' +
-        '<P style="font-size: 90%;">Note: Unicode characters were "lost" in the original spreadsheet, not my fault .</P>'+
-        '<P> More and info and feel welcome to send PRs for <a href="https://github.com/datalad-datasets/ohbm2020-posters" target="_github">https://github.com/datalad-datasets/ohbm2020-posters</a> since I know no JS</p>'
+        '<P> More info, sources, issues, PRs:  <a href="https://github.com/datalad-datasets/ohbm2020-posters" target="_github">https://github.com/datalad-datasets/ohbm2020-posters</a>.</p>'
         );
 
   var table = jQuery('#directory').dataTable({
