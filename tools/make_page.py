@@ -73,7 +73,7 @@ for line in chain(
         rec['videochat'] = f'<a href="https://meet.jit.si/{url}" target="_{url}">jitsi:{url}</a>'
         rec['pdf'] = rec.get('pdf', urls.get(rec['number'], ''))
         rec['authors'] = abstracts.get(rec['number'], {}).get('authors', [])
-        rec['keywords'] = abstracts.get(rec['number'], {}).get('keyword', [])
+        rec['keywords'] = abstracts.get(rec['number'], {}).get('keywords', [])
         recs.append(rec)
         overrides.append({'number': rec['number']})
     except ValueError:
