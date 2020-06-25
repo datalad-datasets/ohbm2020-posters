@@ -596,7 +596,13 @@ wss.onmessage = e => {
 
 function openJit(url, number) {
     wss.send(JSON.stringify({action: "jit", id: number}));
-    window.open(url, "jit"+number);
+    let child = window.open(url, "jit"+number);
+    let timer = setInterval(()=>{
+        if(child.closed) {
+            wss.send(JSON.stringify({action: "jitclose", id: number}));
+            clearInterval(timer);
+        }
+    }, 1000);
 }
 
 function openPdf(url, number) {
