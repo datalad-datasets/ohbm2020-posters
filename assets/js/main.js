@@ -478,7 +478,7 @@ function directory(jQuery) {
         if (data.pdf === '') {
             pdf = '<a href="https://github.com/datalad-datasets/ohbm2020-posters/pulls">[ADD]</a>';
         } else {
-            pdf = '<a href="' + data.pdf + '">PDF</a>';
+            pdf = '<a href="' + data.pdf + '" target="_ohbm2020_pdf_' + data.number + '">PDF</a>';
         }
         jQuery('td', row).eq(5).html(pdf);
     }
