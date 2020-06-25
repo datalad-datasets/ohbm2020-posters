@@ -1,4 +1,7 @@
 # OHBM2020 posters Jitsi rooms
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Just go to https://datalad-datasets.github.io/ohbm2020-posters/ . Wait for the page to load.
 Search for a poster by entering desired words present in the title name or presenter name or keywords and table will
@@ -44,3 +47,22 @@ of such websites.
 Also, if you check git history, you will see that we had used [datalad run](http://handbook.datalad.org/en/latest/basics/101-109-rerun.html) to annotate how `posters.json` was produced.
 So you can use `datalad rerun _produce_posters.json` (where `_produce_posters.json` is just a git tag) to regenerate `posters.json` happen you either modified script or original `.tsv`. 
 
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/christian-monch"><img src="https://avatars3.githubusercontent.com/u/17925232?v=4" width="100px;" alt=""/><br /><sub><b>Christian Mönch</b></sub></a><br /><a href="https://github.com/datalad-datasets/ohbm2020-posters/commits?author=christian-monch" title="Code">💻</a> <a href="#maintenance-christian-monch" title="Maintenance">🚧</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
