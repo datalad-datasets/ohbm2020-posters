@@ -38,12 +38,16 @@ thisfile = Path(__file__)
 infile = thisfile.parent.parent / 'OHBM 2020 Poster Numbering - AbstractsAdHocReport_2015_20200.tsv'
 sdfile = thisfile.parent.parent / 'SoftwareDemos.tsv'
 dlfile = thisfile.parent.parent / 'poster_downloads_matches.csv'
+abfile = thisfile.parent.parent / 'abstract.json'
 
 urls = dict()
 for line in csv.DictReader(dlfile.read_text().splitlines(), quotechar='"', delimiter=','):
     if line['number'] in [None, ''] or '.comet:' in line['url']:
         continue
     urls[int(line['number'])] = line['url']
+
+with abfile.open('r') as src:
+    abstracts = {a['number']: a for a in json.load(src)}
 
 recs = []
 overrides = []
@@ -68,6 +72,8 @@ for line in chain(
         url = 'ohbm2020-{number}'.format(**rec)
         rec['videochat'] = f'<a href="https://meet.jit.si/{url}" target="_{url}">jitsi:{url}</a>'
         rec['pdf'] = rec.get('pdf', urls.get(rec['number'], ''))
+        rec['authors'] = abstracts.get(rec['number'], {}).get('authors', [])
+        rec['keywords'] = abstracts.get(rec['number'], {}).get('keyword', [])
         recs.append(rec)
         overrides.append({'number': rec['number']})
     except ValueError:

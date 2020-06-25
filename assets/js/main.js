@@ -473,6 +473,8 @@ function directory(jQuery) {
       {data: "categories", title: "Categories", className: "dt-left", width: "10%"},
       {data: "videochat", title: "Video Chat", className: "dt-left", width: "18%"},
       {data: "pdf", title: "PDF", className: "dt-left", width: "8%"},
+      {data: "authors", visible: false},
+      {data: "keywords", visible: false},
     ],
     createdRow: function(row, data, index) {
         if (data.pdf === '') {
