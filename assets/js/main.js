@@ -581,35 +581,24 @@ function directory(jQuery) {
   return table;
 }
 
+var wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
 
 //connect to backend
-function connect() {
-    var wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
-    wss.onopen = () => {
-        //wss.send(JSON.stringify({action: "hello"}));
-        wss.send(JSON.stringify({action: "dump"}));
-    }
-    wss.onmessage = e => {
-        //console.dir(e.data);
-        let msg = JSON.parse(e.data);
-        //console.log("messasge", msg);
-        if(msg.dump) {
-            for(let key in msg.dump) {
-                $("#jit_users_"+key).text(msg.dump[key]);
-            }
-        }
-        if(msg.update) $("#jit_users_"+msg.update.id).text(msg.update.count);
-    }
-    /*
-    wss.onclose = function(e) {
-        console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
-        setTimeout(function() {
-           connect();
-        }, 1000);
-    };
-    */
+wss.onopen = () => {
+    //wss.send(JSON.stringify({action: "hello"}));
+    wss.send(JSON.stringify({action: "dump"}));
 }
-connect();
+wss.onmessage = e => {
+    //console.dir(e.data);
+    let msg = JSON.parse(e.data);
+    //console.log("messasge", msg);
+    if(msg.dump) {
+        for(let key in msg.dump) {
+            $("#jit_users_"+key).text(msg.dump[key]);
+        }
+    }
+    if(msg.update) $("#jit_users_"+msg.update.id).text(msg.update.count);
+}
 
 function openJit(url, number) {
     wss.send(JSON.stringify({action: "jit", id: number}));
