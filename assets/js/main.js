@@ -478,11 +478,18 @@ function directory(jQuery) {
     columnDefs: [
         {
             render(data, type, row) {
+                /*
                 return `
                     <button type="button" onclick="openJit('https://meet.jit.si/ohbm2020-${row.number}', ${row.number})">
                         Open
                         <small>(<span id="jit_users_${row.number}">0</span> people)</small>
                     </button>
+                `
+                */
+                return `
+                    <a href="#" onclick="openJit('https://meet.jit.si/ohbm2020-${row.number}', ${row.number})">jitsi:ohbm2020-${row.number}</a>
+                    <small>(<span id="jit_users_${row.number}">0</span> people)</small>
+
                 `
             },
             targets: 4,//video

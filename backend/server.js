@@ -21,17 +21,20 @@ app.ws('/', function(ws, req) {
     ws.on('message', function(data) {
         //console.log("message received", msg);
         try {
-            console.log(data);
+            //console.debug(data);
             let msg = JSON.parse(data);
+            let ip = req.headers["x-real-ip"];
+            let entry;
+
             switch(msg.action) {
             case "dump":
-                console.log("dump requested from", req.headers);
+                console.log("dump:", ip);
                 ws.send(JSON.stringify({dump: counts}));
+                break;
             case "jit":
                 if(!ips[msg.id]) ips[msg.id] = [];
-                let ip = req.headers["x-real-ip"];
-                console.log("jit open", ip);
-                let entry = ips[msg.id].find(c=>ip == ip);
+                console.log("jit:", ip, msg.id);
+                entry = ips[msg.id].find(c=>ip == ip);
                 if(!entry) {
                     ips[msg.id].push({ip, date: new Date()});
                 } else {
@@ -42,28 +45,37 @@ app.ws('/', function(ws, req) {
                     client.send(JSON.stringify({update: {id: msg.id, count: counts[msg.id]}}));
                 });
                 break;
+            case "jitclose":
+                console.log("jitclose:", ip, msg.id);
+                entry = ips[msg.id].find(c=>ip == ip);
+                ips[msg.id].splice(ips[msg.id].indexOf(entry), 1);
+                counts[msg.id] = ips[msg.id].length;
+                aWss.clients.forEach(function (client) {
+                    client.send(JSON.stringify({update: {id: msg.id, count: counts[msg.id]}}));
+                });
+                break;
             }
         } catch (err) {
             console.error(err);
         }
     });
-    console.log('socket', req.testing);
+    //console.log('socket', req.testing);
 });
 
 setInterval(()=>{
-    console.log("removing old connections");
+    //console.log("removing ip older than 120 minutes");
     for(let id in ips) {
         let recents = [];
         let recent = new Date();
-        recent.setTime(recent.getTime() - 1000*60*10); //10 minutes?
+        recent.setTime(recent.getTime() - 1000*60*120); //120 minutes?
         ips[id].forEach(rec=>{
             if(rec.date > recent) recents.push(rec);
         });
         ips[id] = recents;
         if(counts[id] != ips[id].length) {
+            console.log("expire:", id);
             //need to update the counts
             counts[id] = ips[id].length;
-            console.log("new count for", id, counts[id]);
             aWss.clients.forEach(function (client) {
                 client.send(JSON.stringify({update: {id, count: counts[id]}}));
             });
