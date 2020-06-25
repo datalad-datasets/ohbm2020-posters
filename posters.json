@@ -5974,7 +5974,7 @@
    "presenter": "Marcel Farr\u00e9s Franch",
    "categories": "Higher Cognitive Functions<br>Music",
    "videochat": "<a href=\"https://meet.jit.si/ohbm2020-718\" target=\"_ohbm2020-718\">jitsi:ohbm2020-718</a>",
-   "pdf": "https://cdn-akamai.6connex.com/645/1827//poster_OHBM_OMMABA_15925790354416978.pdf"
+   "pdf": "https://drive.google.com/file/d/1eTlZHwjbIiJqetMql5SMV8BQeQUUadU9/view"
   },
   {
    "number": 720,
@@ -13677,8 +13677,8 @@
    "institution": "Baycrest Health Sciences",
    "presenter": "Pradeep Reddy Raamana",
    "categories": "Modeling and Analysis Methods<br>Segmentation and Parcellation",
-   "videochat": "<a href=\"https://meet.jit.si/ohbm2020-1621\" target=\"_ohbm2020-1621\">jitsi:ohbm2020-1621</a>",
-   "pdf": ""
+   "videochat": "<a href=\"https://zoom.us/j/9545579483?pwd=QUM3Um55MWV2RmFuWTJkb3ZKV2xQdz09\" target=\"_ohbm2020-1621\">zoom:9545579483</a> (password: \"visualqc\")",
+   "pdf": "https://crossinvalidation.com/2020/06/22/evaluating-visual-qc-protocols-for-freesurfer-parcellations-error-detection-rate-inter-rater-reliability-and-site-differences/"
   },
   {
    "number": 1622,
@@ -19880,6 +19880,15 @@
    "categories": "Physiology, Metabolism and Neurotransmission<br>Cerebral Metabolism and Hemodynamics",
    "videochat": "<a href=\"https://meet.jit.si/ohbm2020-2342\" target=\"_ohbm2020-2342\">jitsi:ohbm2020-2342</a>",
    "pdf": ""
+  },
+  {
+   "number": 10000,
+   "title": "qEEGT-CBRAIN for Open Science",
+   "institution": "",
+   "pdf": "https://cdn-akamai.6connex.com//645/1827//OHBM_Qeegt-Cbrain_Poster_2020_15922367208559419.pdf",
+   "presenter": " Bosch-Bayard",
+   "categories": "<br>",
+   "videochat": "<a href=\"https://meet.jit.si/ohbm2020-10000\" target=\"_ohbm2020-10000\">jitsi:ohbm2020-10000</a>"
   }
  ]
 }
