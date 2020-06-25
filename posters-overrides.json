@@ -1802,7 +1802,8 @@
    "number": 647
   },
   {
-   "number": 648
+   "number": 648,
+   "pdf": "https://github.com/jennyrieck/OHBM2020/blob/master/Rieck_2020_ResearchDay_OHBM_PLS_struc_func_30x40in_v5.pdf"
   },
   {
    "number": 649
@@ -2133,7 +2134,8 @@
    "number": 768
   },
   {
-   "number": 769
+   "number": 769,
+   "pdf": "https://raw.githubusercontent.com/HamiltonLabUT/presentations/master/Desai_OHBM_2020_Poster_Final.png"
   },
   {
    "number": 770
@@ -3271,7 +3273,8 @@
    "number": 1165
   },
   {
-   "number": 1166
+   "number": 1166,
+   "pdf": "https://cdn-akamai.6connex.com//645/1827//poster_final_15922438588479974.pdf"
   },
   {
    "number": 1167
@@ -5040,7 +5043,8 @@
    "number": 1780
   },
   {
-   "number": 1781
+   "number": 1781,
+   "pdf": "http://danlurie.org/science/ohbm-2020-poster/"
   },
   {
    "number": 1782
@@ -5485,10 +5489,13 @@
    "number": 1928
   },
   {
-   "number": 1929
+   "number": 1929,
+   "videochat": "<a href=\"https://meet.jit.si/rsHRF_toolbox\" target=\"_rsHRF_toolbox\">jitsi:rsHRF_toolbox</a>",
+   "pdf": "https://github.com/sofievdbos/OHBM2020/blob/master/OHBM20_SVDB_interactive.pdf"
   },
   {
-   "number": 1930
+   "number": 1930,
+   "pdf": "https://github.com/datalad-datasets/ohbm2020-posters/files/4827285/OHBM2020_Poster1930_Etzel_b.pdf"
   },
   {
    "number": 1931
@@ -5694,7 +5701,8 @@
    "number": 1997
   },
   {
-   "number": 1998
+   "number": 1998,
+   "pdf": "https://doi.org/10.5281/zenodo.3906045"
   },
   {
    "number": 1999
