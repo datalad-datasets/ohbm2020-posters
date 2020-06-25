@@ -474,6 +474,34 @@ function directory(jQuery) {
       {data: "videochat", title: "Video Chat", className: "dt-left", width: "18%"},
       {data: "pdf", title: "PDF", className: "dt-left", width: "8%"},
     ],
+
+    columnDefs: [
+        {
+            render(data, type, row) {
+                return `
+                    <button type="button" onclick="openJit('https://meet.jit.si/ohbm2020-${row.number}', ${row.number})">
+                        Open
+                        <small>(<span id="jit_users_${row.number}">0</span> people)</small>
+                    </button>
+                `
+            },
+            targets: 4,//video
+        },
+        {
+            render(data, type, row) {
+                if(row.pdf == '') {
+                    return '<a href="https://github.com/datalad-datasets/ohbm2020-posters/pulls">[ADD]</a>';
+                } else {
+                    return '<a href="' + row.pdf + '" target="_ohbm2020_pdf_' + row.number + '">PDF</a>';
+                    //return '<a href="#" onclick="openPdf('"+row.pdf+"', '"+row.number+"')">PDF</a>';
+                    //return '<a href="#" onclick="openPdf("'+row.pdf+'", 1)">PDF</a>';
+                } 
+            },
+            targets: 5,//pdf
+        }
+    ],
+
+      /*
     createdRow: function(row, data, index) {
         if (data.pdf === '') {
             pdf = '<a href="https://github.com/datalad-datasets/ohbm2020-posters/pulls">[ADD]</a>';
@@ -482,6 +510,7 @@ function directory(jQuery) {
         }
         jQuery('td', row).eq(5).html(pdf);
     }
+      */
 //      if (data.name === '..')
 //        parent = true;
 //
@@ -544,3 +573,33 @@ function directory(jQuery) {
   localStorage['ntCache'] = JSON.stringify(ntCache);
   return table;
 }
+
+
+//connect to backend
+console.log("setting up");
+var wss = new WebSocket("wss://dev1.soichi.us/ohbm2020/");
+wss.onopen = () => {
+    //wss.send(JSON.stringify({action: "hello"}));
+    wss.send(JSON.stringify({action: "dump"}));
+}
+wss.onmessage = e => {
+    //console.dir(e.data);
+    let msg = JSON.parse(e.data);
+    //console.log("messasge", msg);
+    if(msg.dump) {
+        for(let key in msg.dump) {
+            $("#jit_users_"+key).text(msg.dump[key]);
+        }
+    }
+    if(msg.update) $("#jit_users_"+msg.update.id).text(msg.update.count);
+}
+
+function openJit(url, number) {
+    wss.send(JSON.stringify({action: "jit", id: number}));
+    window.open(url, "jit"+number);
+}
+
+function openPdf(url, number) {
+    window.open(pdf, "pdf"+number);
+}
+
