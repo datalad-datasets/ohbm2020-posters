@@ -29,11 +29,19 @@
 __author__ = 'yoh'
 __license__ = 'MIT'
 
+import csv
 from pathlib import Path
 import json
 
 thisfile = Path(__file__)
 infile = thisfile.parent.parent / 'OHBM 2020 Poster Numbering - AbstractsAdHocReport_2015_20200.tsv'
+dlfile = thisfile.parent.parent / 'poster_downloads_matches.csv'
+
+urls = dict()
+for line in csv.DictReader(dlfile.read_text().splitlines(), quotechar='"', delimiter=','):
+    if line['number'] in [None, '']:
+        continue
+    urls[int(line['number'])] = line['url']
 
 recs = []
 overrides = []
@@ -49,7 +57,7 @@ for line in infile.read_text().splitlines():
         rec['categories'] = '{}<br>{}'.format(rec.pop('cat1'), rec.pop('cat2'))
         url = 'ohbm2020-{number}'.format(**rec)
         rec['videochat'] = f'<a href="https://meet.jit.si/{url}" target="_{url}">jitsi:{url}</a>'
-        rec['pdf'] = ''
+        rec['pdf'] = urls.get(rec['number'], '')
         recs.append(rec)
         overrides.append({'number': rec['number']})
     except ValueError:
