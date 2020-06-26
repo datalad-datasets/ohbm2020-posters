@@ -199,8 +199,9 @@ function directory(jQuery) {
     let table = jQuery('#directory').DataTable({
         //async: true,    // async get json
         paging: true,  // ensure scrolling instead of pages
+        lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
         rowId: 'id',
-        columns: [ 
+        columns: [
           {data: "number", title: "#", width: "5%"},
           {data: "title", title: "Title", className: "dt-left", width: "42%"},
           {data: "presenter", title: "Presenter", className: "dt-center", width: "15%"},
@@ -245,7 +246,7 @@ function directory(jQuery) {
                         return '<a href="' + row.pdf + '" target="_ohbm2020_pdf_' + row.number + '">PDF</a>';
                         //return '<a href="#" onclick="openPdf('"+row.pdf+"', '"+row.number+"')">PDF</a>';
                         //return '<a href="#" onclick="openPdf("'+row.pdf+'", 1)">PDF</a>';
-                    } 
+                    }
                 },
             }
         ],
