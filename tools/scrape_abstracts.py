@@ -61,6 +61,8 @@ for n, abstr in enumerate(abstracts):
     # get the abstract webpage
     resp = requests.get(abstr['url'])
     resp.raise_for_status()
+    abstr["software-demo"] = \
+       b"presentation: software demonstrations" in resp.content.lower()
     page = BeautifulSoup(resp.content, 'lxml')
 
     # get the abstract body and other relevant info
@@ -98,7 +100,12 @@ for n, abstr in enumerate(abstracts):
 # drop words occurring in more than 25% of abstracts; we want unique words!
 too_common = {k for k, v in bag_of_words.items() if v > 0.25 * len(abstracts)}
 for abstr in abstracts:
-    abstr['abstract'] = list(abstr['abstract'].difference(too_common))
+    # Generally abstract should be present, but if while debugging
+    # only interesting entries are queried for in the loop above - we better
+    # check if there is abstract
+    if 'abstract' in abstr:
+        # sort for consistency between runs
+        abstr['abstract'] = sorted(abstr['abstract'].difference(too_common))
 
 # dump to json
 with open('abstract.json', 'w') as dest:
