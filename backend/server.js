@@ -30,7 +30,7 @@ app.ws('/', function(ws, req) {
         try {
             //console.debug(data);
             let msg = JSON.parse(data);
-            let ip = req.headers["x-real-ip"];
+            let ip = req.headers["x-real-ip"]+"."+msg.cid; 
             let entry;
 
             switch(msg.action) {

@@ -3082,7 +3082,7 @@
   },
   {
    "number": 1098,
-   "videochat": "<a href=\"https://meet.jit.si/cobidas_checklist\" target=\"_cobidas_checklist\">jitsi:cobidas_checklist</a>",
+   "videochat": "cobidas_checklist",
    "pdf": "https://drive.google.com/file/d/1CirkGPplmrbqilPOq7OdKQJYZzwc0AKc/view?usp=sharing"
   },
   {
@@ -3674,7 +3674,7 @@
   },
   {
    "number": 1302,
-   "videochat": "<a href=\"https://meet.jit.si/ohbm2020-412\" target=\"_ohbm2020-412\">jitsi:ohbm2020-412</a>",
+   "videochat": "ohbm2020-412",
    "pdf": "https://cdn-akamai.6connex.com//645/1827//TaskCCA_poster_1__15922324225571065.pdf"
   },
   {
@@ -4583,7 +4583,7 @@
   },
   {
    "number": 1621,
-   "videochat": "<a href=\"https://zoom.us/j/9545579483?pwd=QUM3Um55MWV2RmFuWTJkb3ZKV2xQdz09\" target=\"_ohbm2020-1621\">zoom:9545579483</a> (password: \"visualqc\")",
+   "videochat": "https://zoom.us/j/9545579483?pwd=QUM3Um55MWV2RmFuWTJkb3ZKV2xQdz09",
    "pdf": "https://crossinvalidation.com/2020/06/22/evaluating-visual-qc-protocols-for-freesurfer-parcellations-error-detection-rate-inter-rater-reliability-and-site-differences/"
   },
   {
@@ -5290,7 +5290,7 @@
   },
   {
    "number": 1860,
-   "videochat": "<a href=\"https://meet.jit.si/DeepPrimateBrainShapes\" target=\"_DeepPrimateBrainShapes\">jitsi:DeepPrimateBrainShapes</a>",
+   "videochat": "DeepPrimateBrainShapes",
    "pdf": "https://github.com/katjaq/brainscapes/blob/master/img/Heuer-Toro_BrainScapes_OHBM_2020.pdf"
   },
   {
@@ -5395,7 +5395,7 @@
   },
   {
    "number": 1895,
-   "videochat": "<a href=\"https://meet.jit.si/bids-derivatives\" target=\"_bids-derivatives\">jitsi:bids-derivatives</a>",
+   "videochat": "bids-derivatives",
    "pdf": "https://cdn-akamai.6connex.com/645/1827/poster_15922429379118925.pdf"
   },
   {
@@ -5503,7 +5503,7 @@
   },
   {
    "number": 1929,
-   "videochat": "<a href=\"https://meet.jit.si/rsHRF_toolbox\" target=\"_rsHRF_toolbox\">jitsi:rsHRF_toolbox</a>",
+   "videochat": "rsHRF_toolbox",
    "pdf": "https://github.com/sofievdbos/OHBM2020/blob/master/OHBM20_SVDB_interactive.pdf"
   },
   {
