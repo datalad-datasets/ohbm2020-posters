@@ -1,6 +1,6 @@
 # OHBM2020 posters Jitsi rooms
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Just go to https://datalad-datasets.github.io/ohbm2020-posters/ . Wait for the page to load.
@@ -63,6 +63,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/effigies"><img src="https://avatars0.githubusercontent.com/u/83442?v=4" width="100px;" alt=""/><br /><sub><b>Chris Markiewicz</b></sub></a><br /><a href="https://github.com/datalad-datasets/ohbm2020-posters/commits?author=effigies" title="Code">💻</a> <a href="#ideas-effigies" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="http://rossmarkello.com"><img src="https://avatars0.githubusercontent.com/u/14265705?v=4" width="100px;" alt=""/><br /><sub><b>Ross Markello</b></sub></a><br /><a href="https://github.com/datalad-datasets/ohbm2020-posters/commits?author=rmarkello" title="Code">💻</a> <a href="#ideas-rmarkello" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="http://www.adina-wagner.com"><img src="https://avatars1.githubusercontent.com/u/29738718?v=4" width="100px;" alt=""/><br /><sub><b>Adina Wagner</b></sub></a><br /><a href="#maintenance-adswa" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/sofievdbos"><img src="https://avatars0.githubusercontent.com/u/23309041?v=4" width="100px;" alt=""/><br /><sub><b>Sofie Van Den Bossche</b></sub></a><br /><a href="https://github.com/datalad-datasets/ohbm2020-posters/commits?author=sofievdbos" title="Documentation">📖</a> <a href="#example-sofievdbos" title="Examples">💡</a> <a href="#tutorial-sofievdbos" title="Tutorials">✅</a></td>
   </tr>
 </table>
 
