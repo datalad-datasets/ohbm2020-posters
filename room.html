@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+    <script src='https://meet.jit.si/external_api.js'></script>
+	<script type="text/javascript" charset="utf-8" src="assets/js/reconnecting-websocket.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/room.css">
+</head>
+<body>
+    <div id="meet"/>
+    <script>
+        let id = location.hash.substring(1); //poster id
+        let cid = Math.random().toString(); //client id
+
+        if(!id) alert("no number set in hash");
+
+        let roomName = "ohbm2020-"+id;
+        console.log("opening room", roomName);
+        const api = new JitsiMeetExternalAPI("meet.jit.si", {
+            roomName,
+            parentNode: document.querySelector('#meet')
+        })
+
+        let wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
+        wss.onopen = () => {
+            wss.send(JSON.stringify({action: "jit", id, cid}));
+        }
+        window.addEventListener("beforeunload", function(evt) {
+            wss.send(JSON.stringify({action: "jitclose", id, cid}));
+        });
+    </script>
+</body>
+</html>

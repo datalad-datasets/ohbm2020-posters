@@ -217,17 +217,10 @@ function directory(jQuery) {
             {
                 targets: 4,//video
                 render(data, type, row) {
-                    /*
                     return `
-                        <button type="button" onclick="openJit('https://meet.jit.si/ohbm2020-${row.number}', ${row.number})">
-                            Open
-                            <small>(<span id="jit_users_${row.number}">0</span> people)</small>
-                        </button>
-                    `
-                    */
-                    return `
-                        <a href="#" onclick="openJit('https://meet.jit.si/ohbm2020-${row.number}', ${row.number})">jitsi:ohbm2020-${row.number}</a>
-                        <!--<small>(<span id="jit_users_${row.number}">0</span> people)</small>-->
+                        <a href="#" onclick="openJit('https://meet.jit.si/ohbm2020-${row.number}', ${row.number})">
+                            jitsi:ohbm2020-${row.number}
+                        </a>
                     `
                 },
             },
@@ -244,8 +237,6 @@ function directory(jQuery) {
                         return '<a href="https://github.com/datalad-datasets/ohbm2020-posters/pulls">[ADD]</a>';
                     } else {
                         return '<a href="' + row.pdf + '" target="_ohbm2020_pdf_' + row.number + '">PDF</a>';
-                        //return '<a href="#" onclick="openPdf('"+row.pdf+"', '"+row.number+"')">PDF</a>';
-                        //return '<a href="#" onclick="openPdf("'+row.pdf+'", 1)">PDF</a>';
                     }
                 },
             }
@@ -271,7 +262,6 @@ function directory(jQuery) {
             let msg = JSON.parse(e.data);
             if(msg.dump) {
                 for(let key in msg.dump) {
-                    $("#jit_users_"+key).text(msg.dump[key]);
                     let row = table.row("#p"+key);
                     if(row.length == 1) {
                         table.cell(row, 5).data(msg.dump[key]);
@@ -280,7 +270,6 @@ function directory(jQuery) {
                 table.draw();
             }
             if(msg.update) {
-                $("#jit_users_"+msg.update.id).text(msg.update.count);
                 let row = table.row("#p"+msg.update.id);
                 table.cell(row, 5).data(msg.update.count).draw();
             }
@@ -291,33 +280,7 @@ function directory(jQuery) {
     return table;
 }
 
-let openJits = new Set();
-
-window.addEventListener("beforeunload", function(evt) {
-    openJits.forEach(id=>{
-        wss.send(JSON.stringify({action: "jitclose", id}));
-    });
-});
-
 function openJit(url, number) {
-    wss.send(JSON.stringify({action: "jit", id: number}));
-    openJits.add(number);
-    let child = window.open(url, "jit"+number);
-    let timer = setInterval(()=>{
-        console.log(openJits);
-        if(child.closed) {
-            wss.send(JSON.stringify({action: "jitclose", id: number}));
-            openJits.delete(number);
-            clearInterval(timer);
-        } else {
-            //still open.. let's let the server know that we are still here
-            wss.send(JSON.stringify({action: "jit", id: number}));
-        }
-    }, 1000*3);
+    window.open("room.html#"+number);
 }
-
-function openPdf(url, number) {
-    window.open(pdf, "pdf"+number);
-}
-
 
