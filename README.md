@@ -47,6 +47,7 @@ Go to our website: [https://datalad-datasets.github.io/ohbm2020-posters/](https:
      - An URL to your poster PDF ("pdf").
    * Copy those lines with the information you want to edit/add and paste them under your your poster's number. Do not forget to personalize the information after the colons! If you only want to add an URL to your poster PDF, you only need to copy-paste & personalize one line, i.e. the one starting with `"pdf"`.
    * Always put a comma after the previous line when adding a new one (except for the last line before `]` or `}`).
+   
      ```json 
      {
       "number": 1929,
