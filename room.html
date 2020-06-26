@@ -8,13 +8,14 @@
 <body>
     <div id="meet"/>
     <script>
-        let id = location.hash.substring(1); //poster id
+        let hash = location.hash.substring(1); //jitsi room name
+        let id = hash.split(".")[0];
+        let roomName = hash.split(".")[1];
         let cid = Math.random().toString(); //client id
 
-        if(!id) alert("no number set in hash");
+        if(!roomName) alert("no room name set in hash");
 
-        let roomName = "ohbm2020-"+id;
-        console.log("opening room", roomName);
+        console.log(roomName);
         const api = new JitsiMeetExternalAPI("meet.jit.si", {
             roomName,
             parentNode: document.querySelector('#meet')
