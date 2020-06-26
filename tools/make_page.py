@@ -32,10 +32,13 @@ __license__ = 'MIT'
 import csv
 from pathlib import Path
 import json
+from itertools import chain
 
 thisfile = Path(__file__)
 infile = thisfile.parent.parent / 'OHBM 2020 Poster Numbering - AbstractsAdHocReport_2015_20200.tsv'
+sdfile = thisfile.parent.parent / 'SoftwareDemos.tsv'
 dlfile = thisfile.parent.parent / 'poster_downloads_matches.csv'
+abfile = thisfile.parent.parent / 'abstract.json'
 
 urls = dict()
 for line in csv.DictReader(dlfile.read_text().splitlines(), quotechar='"', delimiter=','):
@@ -43,21 +46,34 @@ for line in csv.DictReader(dlfile.read_text().splitlines(), quotechar='"', delim
         continue
     urls[int(line['number'])] = line['url']
 
+with abfile.open('r') as src:
+    abstracts = {a['number']: a for a in json.load(src)}
+
 recs = []
 overrides = []
-for line in infile.read_text().splitlines():
+orig_header = ("number", "title", "presenter_first", "presenter_last", "institution", "cat1", "cat2")
+for line in chain(
+        infile.read_text().splitlines(),
+        sdfile.read_text().splitlines(),
+    ):
     if not line.strip():
         continue
     try:
-        rec = dict(zip(
-            ("number", "title", "presenter_first", "presenter_last", "institution", "cat1", "cat2"),
-            line.split('\t')))
+        entries = line.split('\t')
+        if len(entries) == len(orig_header):
+            rec = dict(zip(orig_header, entries))
+        elif len(entries) == len(orig_header)+1:
+            rec = dict(zip(orig_header + ('pdf',), entries))
+        else:
+            raise ValueError
         rec['number'] = int(rec['number'])
         rec['presenter'] = '{} {}'.format(rec.pop('presenter_first'), rec.pop('presenter_last'))
         rec['categories'] = '{}<br>{}'.format(rec.pop('cat1'), rec.pop('cat2'))
         url = 'ohbm2020-{number}'.format(**rec)
         rec['videochat'] = f'<a href="https://meet.jit.si/{url}" target="_{url}">jitsi:{url}</a>'
-        rec['pdf'] = urls.get(rec['number'], '')
+        rec['pdf'] = rec.get('pdf', urls.get(rec['number'], ''))
+        rec['authors'] = abstracts.get(rec['number'], {}).get('authors', [])
+        rec['keywords'] = abstracts.get(rec['number'], {}).get('keywords', [])
         recs.append(rec)
         overrides.append({'number': rec['number']})
     except ValueError:
@@ -71,7 +87,12 @@ overrides = {'posters': overrides}
 overrides_file = thisfile.parent.parent / 'posters-overrides.json'
 assert overrides_file.exists()  # must be there now
 overrides = json.loads(overrides_file.read_text())
-for orig, override in zip(recs['posters'], overrides['posters']):
+# trim to only what is there identified by numb
+overrides = {e['number']: e for e in overrides['posters']}
+for orig in recs['posters']:
+    override = overrides.get(orig['number'])
+    if not override:
+        continue
     assert orig['number'] == override['number']
     orig.update(override)
 
