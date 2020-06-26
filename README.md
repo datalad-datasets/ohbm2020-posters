@@ -16,12 +16,12 @@ that (send a PR if you see how).
 As much as we had fun preparing our [Center of Open Neuroscience: DataLad, ReproNim, et al](https://ohbm.6connex.com/event/OHBMAnnualMeeting/en-us#!/CenterforOpenNeuroscience) booth, experience with the conference platform quickly
 showed its shortcomings: poster sessions seems will be limited to "open PDF, find presenter somewhere in an old
 fashion chat and 'converse' there". It is not even 2010 -- it is more of 2000.  There were discussions about
-establishing some gather.town room for poster presentations etc.  
+establishing some gather.town room for poster presentations etc.
 
 Since there is a spreadsheet with all the posters, and unique IDs for each one (but unfortunately without PDF URLs
 to be added to git-annex/DataLad), we decided to (ab)use Jitsi to provide each poster a dedicated video
  room.
- 
+
 ## What the heck is Jitsi?
 
 Jitsi is your free and open source Zoom, Google Meet, whatnot.  But it is more than that -- it is decentralized, and
@@ -40,12 +40,12 @@ Each poster would open in a new "dedicated" tab or window. Clicking on it again 
 
 ## Implementation
 
-This "website" is a crude lobotomization of the basic DataLad datasets navigator 
+This "website" is a crude lobotomization of the basic DataLad datasets navigator
 `datalad create-sibling --with-ui` creates for you. https://datasets.datalad.org is one
 of such websites.
 
 Also, if you check git history, you will see that we had used [datalad run](http://handbook.datalad.org/en/latest/basics/101-109-rerun.html) to annotate how `posters.json` was produced.
-So you can use `datalad rerun _produce_posters.json` (where `_produce_posters.json` is just a git tag) to regenerate `posters.json` happen you either modified script or original `.tsv`. 
+So you can use `datalad rerun _produce_posters.json` (where `_produce_posters.json` is just a git tag) to regenerate `posters.json` happen you either modified script or original `.tsv`.
 
 
 ## Contributors ✨
