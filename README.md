@@ -27,7 +27,7 @@ Go to our website: <a href="https://datalad-datasets.github.io/ohbm2020-posters/
 
 *Remark*: Unfortunately, the "source" spreadsheet neither had presentation dates/times, nor URLs to PDFs. So we might improve upon that (send a PR if you see how).
 
-### :heavy_check_mark: How to do a Pull Request? Adding Your Poster's Info to the Table
+### :heavy_check_mark: How to Do a Pull Request? Adding Your Poster's Info to the Table
 
 1. <b>GitHub account</b>: Create a <a href="https://github.com">GitHub account</a> if you don’t already have one. As a student, you can apply for the <a href="https://help.github.com/en/github/teaching-and-learning-with-github-education/applying-for-a-student-developer-pack">GitHub Student Developer Pack</a>, which includes offers and benefits from GitHub partners.
  2. <b>Forking</b>: Fork https://github.com/datalad-datasets/ohbm2020-posters to create a copy of the repository on your own GitHub account.
