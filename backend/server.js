@@ -34,12 +34,15 @@ app.ws('/', function(ws, req) {
             case "jit":
                 if(!ips[msg.id]) ips[msg.id] = [];
                 console.log("jit:", ip, msg.id);
-                entry = ips[msg.id].find(c=>ip == ip);
+                entry = ips[msg.id].find(c=>c.ip==ip);
                 if(!entry) {
+                    console.log("new ip", ip);
                     ips[msg.id].push({ip, date: new Date()});
                 } else {
+                    console.log("exising ip");
                     entry.date = new Date();
                 }
+                console.dir(ips[msg.id]);
                 counts[msg.id] = ips[msg.id].length;
                 aWss.clients.forEach(function (client) {
                     client.send(JSON.stringify({update: {id: msg.id, count: counts[msg.id]}}));
@@ -47,6 +50,7 @@ app.ws('/', function(ws, req) {
                 break;
             case "jitclose":
                 console.log("jitclose:", ip, msg.id);
+                if(!ips[msg.id]) ips[msg.id] = []; //could hapen
                 entry = ips[msg.id].find(c=>ip == ip);
                 ips[msg.id].splice(ips[msg.id].indexOf(entry), 1);
                 counts[msg.id] = ips[msg.id].length;
