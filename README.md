@@ -22,9 +22,9 @@ Go to our website: [https://datalad-datasets.github.io/ohbm2020-posters/](https:
 <img src="./img/datalad_OHBM2020Posters_icons.png" width="700"/>
 <br><br>
 :mag::eyes::door: 
-1. **Searching for a Poster**: Enter your desired keywords (Number ID, Title, Presenter, Category/ies) in the `Search` box, click on `Enter`, and the table will be limited to the results of your search. 
-2. **Viewing a Poster PDF**: Click on the `PDF` associated with the poster you would like to "present" or "attend". Each specific poster PDF would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open.
-3. **Visiting a Poster Jitsi Room**: Click on the `jitsi:` associated with the poster you would like to "present" or "attend". Again, each specific poster Jitsi room would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open. Presenters can share their poster window by clicking on the `Share your screen` button in the bottom-left corner of the Jitsi room.
+1. **Searching for a poster**: Enter your desired keywords (Number ID, Title, Presenter, Category/ies) in the `Search` box, click on `Enter`, and the table will be limited to the results of your search. 
+2. **Viewing a poster PDF**: Click on the `PDF` associated with the poster you would like to "present" or "attend". Each specific poster PDF would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open.
+3. **Visiting a poster Jitsi room**: Click on the `jitsi:` associated with the poster you would like to "present" or "attend". Again, each specific poster Jitsi room would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open. Presenters can share their poster window by clicking on the `Share your screen` button in the bottom-left corner of the Jitsi room.
 
 *Remark*: Unfortunately, the "source" spreadsheet neither had presentation dates/times, nor URLs to PDFs. So we might improve upon that (send a PR if you see how).
 
@@ -41,13 +41,32 @@ Go to our website: [https://datalad-datasets.github.io/ohbm2020-posters/](https:
      <img src="./img/datalad_OHBM2020Posters_4b.png" width="250"/>
 4. **Editing**: Within your Branch, go to the `posters-overrides.json` file & click on the pencil :pencil2: in the top-right corner of the file to edit/add your poster's info (`Video Chat` and `PDF`) to the table.
    * Search for your poster's number (e.g. `"number": 1929`).
-   * Put a comma after your poster's number (e.g. `"number": 1929,`).
-   * Copy those lines starting with `"videochat"` and `"pdf"` and paste them under your number, e.g. `"number": 1929,`. Do not forget to change `JITSI_ROOM_NAME` and `POSTER_PDF_URL` to 1) the name of your own Jitsi room and 2) the URL to your own poster.<br><br>   
-     ```json
+   * Which information to edit/add? 
+     - The poster information from the OHBM's "source" spreadsheet (--> only if you want to edit an error in the "number", "title", "institution", "presenter", "categories", "authors", or "keywords" fields). You can check these fields in the [`posters.json`](./posters.json) file. Click on `View raw` & search for your poster's number.  
+     - The poster Jitsi room's name & URL ("videochat" --> only if you want to edit the default Jitsi room's name & URL we've allocated to you: `jitsi:ohbm2020-POSTER_NUMBERID`).
+     - An URL to your poster PDF ("pdf").
+   * Copy those lines with the information you want to edit/add and paste them under your your poster's number. Do not forget to personalize the information after the colons! If you only want to add an URL to your poster PDF, you only need to copy-paste & personalize one line, i.e. the one starting with `"pdf"`.
+   * Always put a comma after the previous line when adding a new one (except for the last line before `]` or `}`).
+     ```json 
      {
       "number": 1929,
-      "videochat": "<a href=\"https://meet.jit.si/JITSI_ROOM_NAME\" target=\"JITSI_ROOM_NAME\">jitsi:JITSI_ROOM_NAME</a>",
-      "pdf": "POSTER_PDF_URL"
+      "title": "The rsHRF toolbox (v2.2): Additional features and analyses, and extended user documentation",
+      "institution": "Ghent University",
+      "presenter": "Sofie Van Den Bossche",
+      "categories": "Neuroinformatics and Data Sharing<br>Workflows",
+      "videochat": "<a href=\"https://meet.jit.si/rsHRF_toolbox\" target=\"_rsHRF_toolbox\">jitsi:rsHRF_toolbox</a>",
+      "pdf": "https://github.com/sofievdbos/OHBM2020/blob/master/OHBM20_SVDB_interactive.pdf",
+      "authors": [
+       "Sofie Van Den Bossche",
+       "Guorong Wu",
+       "Nigel Colenbier"
+      ],
+      "keywords": [
+       "functional mri",
+       "statistical methods",
+       "workflows",
+       "other - resting-state fmri; hemodynamic response function; toolbox; neuroinformatics"
+      ]
      }
       ```
 5. **Committing**: Commit your changes by clicking on the green `Commit changes` button. Do not forget to add a comment, e.g. `add videochat and pdf to poster 1929`.<br><br>
