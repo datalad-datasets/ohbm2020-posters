@@ -1403,7 +1403,8 @@
    "number": 499
   },
   {
-   "number": 500
+   "number": 500,
+   "pdf": "https://www.researchgate.net/profile/Thijs_Dhollander/publication/342466648_Changes_in_three-tissue_microstructural_compositions_of_normal-appearing_white_matter_after_stroke/links/5ef5b4bea6fdcc4ca4311d79/Changes-in-three-tissue-microstructural-compositions-of-normal-appearing-white-matter-after-stroke.pdf"
   },
   {
    "number": 501
@@ -1992,7 +1993,8 @@
    "number": 717
   },
   {
-   "number": 718
+   "number": 718,
+   "pdf": "https://drive.google.com/file/d/1eTlZHwjbIiJqetMql5SMV8BQeQUUadU9/view"
   },
   {
    "number": 720
@@ -2880,7 +2882,8 @@
    "number": 1030
   },
   {
-   "number": 1031
+   "number": 1031,
+   "pdf": "https://github.com/faskowit/faskowit.github.io/blob/master/host/faskowitz1_ohbm2020_pdfcopy.pdf" 
   },
   {
    "number": 1032
@@ -3322,7 +3325,8 @@
    "number": 1181
   },
   {
-   "number": 1182
+   "number": 1182,
+   "pdf": "https://github.com/faskowit/faskowit.github.io/blob/master/host/faskowitz2_ohbm2020_pdfcopy.pdf"
   },
   {
    "number": 1183
@@ -4365,7 +4369,9 @@
    "number": 1544
   },
   {
-   "number": 1545
+   "number": 1545,
+   "title": "Exact Voxelwise Inference using Random Field Theory",
+   "pdf": "https://sjdavenport.github.io/talks/OHBM/ohbm2020.pdf"
   },
   {
    "number": 1546
@@ -4575,7 +4581,9 @@
    "number": 1618
   },
   {
-   "number": 1621
+   "number": 1621,
+   "videochat": "<a href=\"https://zoom.us/j/9545579483?pwd=QUM3Um55MWV2RmFuWTJkb3ZKV2xQdz09\" target=\"_ohbm2020-1621\">zoom:9545579483</a> (password: \"visualqc\")",
+   "pdf": "https://crossinvalidation.com/2020/06/22/evaluating-visual-qc-protocols-for-freesurfer-parcellations-error-detection-rate-inter-rater-reliability-and-site-differences/"
   },
   {
    "number": 1622
@@ -4725,7 +4733,8 @@
    "number": 1673
   },
   {
-   "number": 1674
+   "number": 1674,
+   "pdf": "https://github.com/faskowit/faskowit.github.io/blob/master/host/faskowitz3_ohbm2020_pdfcopy.pdf"
   },
   {
    "number": 1675
@@ -5461,7 +5470,9 @@
    "number": 1919
   },
   {
-   "number": 1920
+   "number": 1920,
+   "title": "New longitudinal and deep learning pipelines in the Clinica software platform",
+   "pdf": "https://alexandre-routier.com//assets/pdf/posters/OHBM2020_Poster-1920_Clinica.pdf"
   },
   {
    "number": 1921
@@ -5489,7 +5500,9 @@
    "number": 1928
   },
   {
-   "number": 1929
+   "number": 1929,
+   "videochat": "<a href=\"https://meet.jit.si/rsHRF_toolbox\" target=\"_rsHRF_toolbox\">jitsi:rsHRF_toolbox</a>",
+   "pdf": "https://github.com/sofievdbos/OHBM2020/blob/master/OHBM20_SVDB_interactive.pdf"
   },
   {
    "number": 1930,
@@ -5699,7 +5712,8 @@
    "number": 1997
   },
   {
-   "number": 1998
+   "number": 1998,
+   "pdf": "https://doi.org/10.5281/zenodo.3906045"
   },
   {
    "number": 1999

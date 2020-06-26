@@ -34,31 +34,6 @@ function urlExists(url) {
   return http.status !== 404;
 }
 
-///**
-// * construct parent path to current url
-// * @param {string} url current url
-// * @param {string} nodeName clicked node name(not required)
-// * @return {string} url to parent of current url
-// */
-//function parentUrl(url, nodeName) {
-//  var turl = url.charAt(url.length - 1) === '/' ? url : url.concat("/");
-//  var urlArray = turl.split(/[\\/]/);
-//  urlArray.splice(-2, 1);
-//  return urlArray.join('/');
-//}
-
-///**
-// * construct child path from current url and clicked node name
-// * @param {string} url current url
-// * @param {string} nodeName clicked node name
-// * @return {string} url to reach clicked node
-// */
-//function childUrl(url, nodeName) {
-//  var turl = url.charAt(url.length - 1) === '/' ? url.slice(0, -1) : url;
-//  var tnodeName = nodeName.charAt(0) === '/' ? nodeName.slice(1) : nodeName;
-//  return turl + '/' + tnodeName;
-//}
-
 /**
  * if path given return path else return window.location.pathname
  * replaces direct calls to window.location with function
@@ -99,30 +74,6 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2]); // .replace(/\+/g, " "));
 }
 
-///**
-// * Create Breadcrumbs to current location in dataset
-// * @param {string} jQuery jQuery library object
-// * @param {string} md5 to compute name of current dataset
-// * @param {string} json metadata of current node
-// * @return {array} html linkified breadcrumbs array
-// */
-//function bread2crumbs(jQuery, md5) {
-//  var rawCrumbs = loc().href.replace(/#.*/, '').replace(/\/$/, '').split('/');  // split, remove trailing '/'
-//  var spanClass = '<span class="dir">';
-//  var crumbs = [];
-//  for (var index = 2; index < rawCrumbs.length; index++) {
-//    if (rawCrumbs[index] === '?dir=')
-//      continue;
-//    rawCrumbs[index] = decodeURI(rawCrumbs[index]);
-//    var crumbLink = rawCrumbs.slice(0, index).join('/');
-//    var nextLink = crumbLink + '/' + rawCrumbs[index];
-//    // create span class of crumb based on node type it represents
-//    spanClass = '<span class="' + getNodeType(jQuery, md5, nextLink) + '">';
-//    crumbs.push('<a href=' + nextLink + '>' + spanClass + rawCrumbs[index] + '</span></a>');
-//  }
-//  return crumbs;
-//}
-
 /*
 Helper to check if cache has the item and the key for it set, get and set them
 */
@@ -139,64 +90,6 @@ function set_cached(item, key, value) {
     return value;
 }
 
-///**
-// * Get global URL for the current dataset containing the directory.
-// * Current loc is the one with URL containing path in the query
-// * @return {string} URL to top of current dataset
-// */
-//function get_dataset_global_url() {
-//  // TODO -- RF to centralize common logic with bread2crumbs
-//  var href = loc().href;
-//  var rawCrumbs = href.split('/');
-//  var ri_ = '';
-//
-//  var dir = getParameterByName('dir', href);
-//  var topurl = href.replace(/\?.*/, '').replace(/\/$/, '')
-//
-//  if (has_cached(dir, "dataset_url"))
-//    return get_cached(dir, "dataset_url");
-//
-//  if (has_cached(dir, "type")
-//      && ((ntCache[dir].type == 'git') || (ntCache[dir].type == 'annex'))) {
-//      ri = topurl + dir
-//  }
-//  else {
-//      // poor Yarik knows no JS
-//      // TODO:  now check for the last dataset is crippled, we would need
-//      // meld logic with breadcrumbs I guess, whenever they would get idea
-//      // of where dataset boundary is
-//      var ri = null;
-//      for (var index = 0; index < rawCrumbs.length; index++) {
-//        if (rawCrumbs[index] === '?dir=')
-//          continue;
-//        if (ri_)
-//          ri_ += '/';
-//        ri_ += rawCrumbs[index];
-//        // TODO: avoid direct query for urlExists and make use of the ntCache
-//        if (urlExists(ri_ + '/' + metadataDir)) {
-//          ri = ri_;
-//        }
-//      }
-//  }
-//  if (ri)
-//    set_cached(dir, "dataset_url", ri);
-//  return ri;
-//}
-
-///**
-// * Create installation RI
-// * @return {string} RI to install current dataset from
-// */
-//function get_install_ri() {
-//  var ri = get_dataset_global_url();
-//  // possible shortcuts
-//  if (ri) {
-//    ri = ri.replace('http://localhost:8080', '//');   // for local debugging
-//    ri = ri.replace('http://datasets.datalad.org', '//');   // for deployment
-//  }
-//  return ri;
-//}
-//
 /**
  * update url parameter or url ?
  * @param {string} nextUrl next url to traverse to
@@ -215,151 +108,6 @@ function updateParamOrPath(nextUrl, type, currentState) {
   else
     return true;
 }
-
-///**
-// * decide the url to move to based on current location and clicked node
-// * @param {string} data data of clicked node
-// * @param {string} url url to extract parameter from by getParameterByName
-// * @return {Object} json containing traverse type and traverse path
-// */
-//function clickHandler(data, url) {
-//  // don't do anything for broken links
-//  if (data.type === 'link-broken' || data.type === 'uninitialized')
-//    return data.url ? {next: data.url, type: 'assign'} : {next: '', type: 'none'};
-//  // get directory parameter
-//  var dir = getParameterByName('dir', url);
-//  // which direction to move, up or down the path ?
-//  var move = data.name === '..' ? parentUrl : childUrl;
-//  // which path to move, dir parameter or current path ?
-//  var next = dir ? move(absoluteUrl(dir), data.name) : move(absoluteUrl(''), data.name);
-//  var traverse = {next: next, type: 'assign'};
-//  // if to update parameter, make next relative to index.html path
-//  if (updateParamOrPath(next, data.type, dir))
-//    /* encodeURIComponent would encode more https://stackoverflow.com/a/23842171 */
-//    traverse = {next: '?dir=' + encodeURI(next.replace(loc().pathname, '/')), type: 'search'};
-//  // if clicked was current node '.', remove '.' at at end of next
-//  if (data.name === '.')
-//    traverse.next = traverse.next.slice(0, -1);
-//  return traverse;
-//}
-//
-///**
-// * construct path to metadata json of node to be rendered
-// * @param {object} md5 the md5 library object, used to compute metadata hash name of current node
-// * @param {bool} parent if parent, find metadata file of parent directory instead
-// * @param {object} nodeurl if nodeurl, find metadata file wrt to node at nodeurl (default: current loc())
-// * @return {string} path to the (default: current loc()) node's metadata file
-// */
-//function metadataLocator(md5, parent, nodeurl) {
-//  // if path argument set, find metadata file wrt node at path directory
-//  var nodepath = typeof nodeurl !== 'undefined' ? nodeurl : loc().href;
-//  var startLoc = absoluteUrl(
-//                        getParameterByName('dir', nodepath))
-//                    .replace(/\/+$/, '');
-//
-//  if (startLoc === '' && parent) return "";
-//
-//  // if parent argument set, find metadata file of parent directory instead
-//  var findParentDs = typeof parent !== 'undefined' ? parent : false;
-//  startLoc = findParentDs ? parentUrl(startLoc) : startLoc;
-//  startLoc = startLoc.replace(/\/+$/, '');
-//  var currentDs = startLoc;
-//  var cacheKey = (findParentDs ? "%PARENT%" : "") + startLoc;
-//  // urlExists("http://localhost:8081/CHECK" + cacheKey)
-//  if (has_cached(cacheKey, "metadata_path")) return get_cached(cacheKey, "metadata_path");
-//  // traverse up directory tree till a dataset directory found
-//  // check by testing if current directory has a metadata directory
-//  while (!urlExists(currentDs + "/" + metadataDir)) {
-//    // return error code, if no dataset found till root dataset
-//    if (currentDs.length <= loc().pathname.length)
-//      return '';
-//    // go to parent of current directory
-//    currentDs = parentUrl(currentDs).replace(/^\/+/, '/').replace(/\/+$/, '');
-//  }
-//
-//  // if locating parent dataset or current_loc is a dataset, metadata filename = md5 of '/'
-//  if (startLoc === currentDs) {
-//    var metadataPath = currentDs + '/' + metadataDir + md5('/');
-//  }
-//  else {
-//    // else compute name of current nodes metadata hash
-//    var metadataPath = getParameterByName('dir')
-//        .replace(currentDs
-//                 .replace(/\/$/, '')                // remove ending / from currentDs
-//                 .replace(loc().pathname, ''), '')  // remove basepath to dir
-//        .replace(/^\/+/, '')                        // replace beginning /'s
-//        .replace(/\/+$/, '');                       // replace ending /'s with /
-//    metadataPath = currentDs + "/" + metadataDir + md5(metadataPath);
-//  }
-//  return set_cached(cacheKey, "metadata_path", metadataPath);
-//}
-
-///**
-// * Retrieve metadata json of (parent of) node at path (default: current loc)
-// * @param {string} jQuery jQuery library object
-// * @param {string} md5 path of current dataset
-// * @param {bool} parent if parent, find metadata json of parent directory instead
-// * @param {bool} top if top, don't return children metadata
-// * @param {string} nodeurl if nodeurl, find metadata json wrt node at nodeurl (default: loc().href)
-// * @return {array} return metadata json and location of node's dataset, if it exists
-// */
-//function nodeJson(jQuery, md5, parent, top, nodeurl) {
-//  // if path argument set, find metadata file wrt node at path directory, else current location
-//  // if parent argument set, find metadata json of parent directory instead
-//  var nodeMetaUrl = metadataLocator(md5, parent, nodeurl);
-//
-//  // if node's dataset or node's metadata directory doesn't exist, return error code
-//  if (nodeMetaUrl === '' || !urlExists(nodeMetaUrl))
-//    return [{}, null];
-//
-//  // else return required info for parent row from parent metadata json
-//  var nodeJson_ = {};
-//
-//  jQuery.ajax({
-//    url: nodeMetaUrl,
-//    dataType: 'json',
-//    async: false,
-//    success: function(data) {
-//      var dname = parent ? ".." : data.name;
-//      nodeJson_ = top ? {name: dname || '-',
-//                         date: data.date || '-',
-//                         path: data.path || '-',
-//                         type: data.type || 'dir',
-//                         description: data.description || '',
-//                         size: sizeRenderer(data.size || null)}
-//                      : data;
-//    }
-//  });
-//
-//  // extract relative url of current node's dataset
-//  var metaDirRegex = new RegExp(metadataDir + ".*", "g");
-//  var currentDs = nodeMetaUrl.replace(metaDirRegex, '').replace(loc().pathname, '/');
-//  return {js: nodeJson_, ds: currentDs};
-//}
-
-///**
-// * render size of row entry based on size's present and their values
-// * @param {object} size json object containing size info of current row entry
-// * @return {string} return html string to be rendered in size column of current row entry
-// */
-//function sizeRenderer(size) {
-//  // if size is undefined
-//  if (!size)
-//    return '-';
-//  // set ondisk_size = '-' if ondisk doesn't exist or = 0
-//  if (!size.ondisk || size.ondisk === '0 Bytes')
-//    size.ondisk = '-';
-//  // set total_size = '-' if total doesn't exist or = 0
-//  if (!size.total || size.total === '0 Bytes')
-//    size.total = '-';
-//
-//  // show only one size, if both sizes present and identical
-//  if (size.ondisk === size.total)
-//    return size.total;
-//  // else show "ondisk size" / "total size"
-//  else
-//    return size.ondisk + "/" + size.total;
-//}
 
 /**
  * wrap and insert error message into html
@@ -435,112 +183,126 @@ function getNodeType(jQuery, md5, url) {
  * @return {object} returns the rendered DataTable object
  */
 function directory(jQuery) {
-  var parent = false;
-  var md5Url = "posters.json";
 
-  if (!urlExists(md5Url)) {
-    errorMsg(
-      jQuery,
-        "Could not find metadata "
-    );
-    return;
-  }
+    // Embed the table placeholder
+    jQuery('#content').prepend('<table id="directory" class="display"></table>');
 
-  // Embed the table placeholder
-  jQuery('#content').prepend('<table id="directory" class="display"></table>');
-
-  // add HOWTO install
+    // add HOWTO install
     jQuery('#installation').prepend(
-        '<P style="margin-top: 0px;">This is a very crude attempt to help OHBM 2020 participants to establish centralized registry of Jitsi audio-video conference rooms per each poster.</P>' +
-        '<P style="margin-top: 0px;">Just browse or quickly search by word/name.</P>' +
+        '<P style="margin-top: 0px;">Centralized registry of Jitsi audio-video conference rooms per each poster or software demo of OHBM 2020.</P>' +
+        '<P style="margin-top: 0px;"><b>We turned on paging, please search by poster number, keywords, names, etc.</b></P>' +
+        '<P style="margin-top: 0px;">"Online" counts are approximate and count only people attending through this page.</P>' +
         '<P style="margin-top: 0px;">For every poster there is a dedicated Jitsi room, which would open in a "dedicated" new window/tab.</P>' +
-        '<P style="font-size: 90%;">Note: Unicode characters were "lost" in the original spreadsheet, not my fault .</P>'+
-        '<P> More and info and feel welcome to send PRs for <a href="https://github.com/datalad-datasets/ohbm2020-posters" target="_github">https://github.com/datalad-datasets/ohbm2020-posters</a> since I know no JS</p>'
+        '<P> More info, sources, issues, PRs:  <a href="https://github.com/datalad-datasets/ohbm2020-posters" target="_github">https://github.com/datalad-datasets/ohbm2020-posters</a>.</p>'
         );
 
-  var table = jQuery('#directory').dataTable({
-    async: true,    // async get json
-    paging: false,  // ensure scrolling instead of pages
-    ajax: {         // specify url to get json from ajax
-      url: md5Url,
-      dataSrc: "posters"
-    },
-    //order: [[6, "desc"], [0, 'asc']],
-    columns: [      // select columns and their names from json
-      {data: "number", title: "#", width: "5%"},
-      {data: "title", title: "Title", className: "dt-left", width: "35%"},
-      {data: "presenter", title: "Presenter", className: "dt-center", width: "20%"},
-      {data: "categories", title: "Categories", className: "dt-left", width: "10%"},
-      {data: "videochat", title: "Video Chat", className: "dt-left", width: "18%"},
-      {data: "pdf", title: "PDF", className: "dt-left", width: "8%"},
-    ],
-    createdRow: function(row, data, index) {
-        if (data.pdf === '') {
-            pdf = '<a href="https://github.com/datalad-datasets/ohbm2020-posters/pulls">[ADD]</a>';
-        } else {
-            pdf = '<a href="' + data.pdf + '">PDF</a>';
+    let table = jQuery('#directory').DataTable({
+        //async: true,    // async get json
+        paging: true,  // ensure scrolling instead of pages
+        rowId: 'id',
+        columns: [ 
+          {data: "number", title: "#", width: "5%"},
+          {data: "title", title: "Title", className: "dt-left", width: "42%"},
+          {data: "presenter", title: "Presenter", className: "dt-center", width: "15%"},
+          {data: "categories", title: "Categories", className: "dt-left", width: "10%"},
+          {data: "videochat", title: "Video Chat", className: "dt-left", width: "15%"},
+          {data: "people", title: "Online", className: "dt-left", width: "5%"},
+          {data: "pdf", title: "PDF", className: "dt-left", width: "8%"},
+          {data: "authors", visible: false},
+          {data: "keywords", visible: false},
+        ],
+
+        columnDefs: [
+            {
+                targets: 4,//video
+                render(data, type, row) {
+                    /*
+                    return `
+                        <button type="button" onclick="openJit('https://meet.jit.si/ohbm2020-${row.number}', ${row.number})">
+                            Open
+                            <small>(<span id="jit_users_${row.number}">0</span> people)</small>
+                        </button>
+                    `
+                    */
+                    return `
+                        <a href="#" onclick="openJit('https://meet.jit.si/ohbm2020-${row.number}', ${row.number})">jitsi:ohbm2020-${row.number}</a>
+                        <!--<small>(<span id="jit_users_${row.number}">0</span> people)</small>-->
+                    `
+                },
+            },
+            {
+                targets: 5,//people
+                render(data, type, row) {
+                    return row.people||'';
+                },
+            },
+            {
+                targets: 6,//pdf
+                render(data, type, row) {
+                    if(row.pdf == '') {
+                        return '<a href="https://github.com/datalad-datasets/ohbm2020-posters/pulls">[ADD]</a>';
+                    } else {
+                        return '<a href="' + row.pdf + '" target="_ohbm2020_pdf_' + row.number + '">PDF</a>';
+                        //return '<a href="#" onclick="openPdf('"+row.pdf+"', '"+row.number+"')">PDF</a>';
+                        //return '<a href="#" onclick="openPdf("'+row.pdf+'", 1)">PDF</a>';
+                    } 
+                },
+            }
+        ],
+
+    }); //end of DataTable
+
+    //load posters
+    fetch("posters.json").then(res=>res.json()).then(data=>{
+        data.posters.forEach(p=>{
+            p.id = 'p'+p.number; //cannot be number (or string of number)
+            p.people = 0;
+        });
+        table.rows.add(data.posters).draw();
+
+        wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
+
+        //connect to backend
+        wss.onopen = () => {
+            wss.send(JSON.stringify({action: "dump"}));
         }
-        jQuery('td', row).eq(5).html(pdf);
-    }
-//      if (data.name === '..')
-//        parent = true;
-//
-//      // size rendering logic
-//      jQuery('td', row).eq(2).html(sizeRenderer(data.size));
-//
-//      // if row is a directory append '/' to name cell
-//      if (data.type === 'dir' || data.type === 'git' || data.type === 'annex' || data.type === 'uninitialized') {
-//        var orig = jQuery('td', row).eq(0).html();
-//        orig = '<a>' + orig + '/</a>';
-//        if (data.tags) {
-//          orig = orig + "&nbsp;<span class='gittag'>@" + data.tags + "</span>";
-//        }
-//        if (data.url) {
-//          orig = orig + "&nbsp;<a href='" + data.url + "'><div id='img_external_link'/></a>";
-//        }
-//        jQuery('td', row).eq(0).html(orig);
-//      }
-//      if (data.name === '..')
-//        jQuery('td', row).eq(2).html('');
-//      for (var i = 0; i < 4; i++)  // attach css based on node-type to visible columns of each row
-//        jQuery('td', row).eq(i).addClass(data.type);
-//      // possibly present the README.md at the bottom of the page
-//      if (data.name === 'README.md' && data.type === 'file') {
-//        // Render and embed the content of that file
-//        // TODO: may be we should cache the rendering as well??
-//        jQuery.ajax({
-//          url: get_dataset_global_url() + '/' + data.path,
-//          dataType: 'text',
-//          success: function(data) {
-//            jQuery('#README').append(converter.makeHtml(data));
-//          }
-//        });
-//      }
-//    },
-//    // add click handlers to each row(cell) once table initialised
-//    initComplete: function() {
-//      var api = this.api();
-//      // all tables should have ../ parent path except webinterface root
-//      if (!parent) {
-//        var parentMeta = nodeJson(jQuery, md5, true, true).js;
-//        if (!jQuery.isEmptyObject(parentMeta))
-//          api.row.add(parentMeta).draw();
-//      }
-//      // add click handlers
-//      api.$('tr').click(function() {
-//        var traverse = clickHandler(api.row(this).data());
-//        if (traverse.type === 'assign')
-//          // window.location.assign(traverse.next);
-//          window.location.href = traverse.next;
-//        else if (traverse.type === 'search')
-//          window.location.search = traverse.next;
-//      });
-//      // add breadcrumbs
-//      jQuery('#directory_filter').prepend('<span class="breadcrumb">' +
-//                                          bread2crumbs(jQuery, md5).join(' / ') +
-//                                          '</span>');
-//   }
-  });
-  localStorage['ntCache'] = JSON.stringify(ntCache);
-  return table;
+        wss.onmessage = e => {
+            let msg = JSON.parse(e.data);
+            if(msg.dump) {
+                for(let key in msg.dump) {
+                    $("#jit_users_"+key).text(msg.dump[key]);
+                    let row = table.row("#p"+key);
+                    if(row.length == 1) {
+                        table.cell(row, 5).data(msg.dump[key]);
+                    }
+                }
+                table.draw();
+            }
+            if(msg.update) {
+                $("#jit_users_"+msg.update.id).text(msg.update.count);
+                let row = table.row("#p"+msg.update.id);
+                table.cell(row, 5).data(msg.update.count).draw();
+            }
+        }
+    });
+
+    localStorage['ntCache'] = JSON.stringify(ntCache);
+    return table;
 }
+
+function openJit(url, number) {
+    wss.send(JSON.stringify({action: "jit", id: number}));
+    let child = window.open(url, "jit"+number);
+    let timer = setInterval(()=>{
+        if(child.closed) {
+            wss.send(JSON.stringify({action: "jitclose", id: number}));
+            clearInterval(timer);
+        }
+    }, 1000);
+}
+
+function openPdf(url, number) {
+    window.open(pdf, "pdf"+number);
+}
+
+
