@@ -25,8 +25,6 @@ Go to our website: <a href="https://datalad-datasets.github.io/ohbm2020-posters/
 2. <b>Viewing a Poster PDF</b>: Click on the `PDF` associated with the poster you would like to "present" or "attend". Each specific poster PDF would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open.
 3. <b>Visiting a Poster Jitsi Room</b>: Click on the `jitsi:` associated with the poster you would like to "present" or "attend". Again, each specific poster Jitsi room would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open. Presenters can share their poster window by clicking on the `Share your screen` button in the bottom-left corner of the Jitsi room. <!--Jitsi requires a browser extension to provide the ability to share your desktop. We have been using Jitsi happily on Chrome/Chromium for years. <a href="https://chrome.google.com/webstore/detail/jitsi-meetings/kglhbbefdnlheedjiejgomgmfplipfeb?hl=en-US">Extension link</a>.-->
 
-:tada: HAVE FUN!! :tada:
-
 *Remark*: Unfortunately, the "source" spreadsheet neither had presentation dates/times, nor URLs to PDFs. So we might improve upon that (send a PR if you see how).
 
 ### :heavy_check_mark: How to do a Pull Request? Adding Your Poster's Info to the Table
@@ -59,8 +57,6 @@ Go to our website: <a href="https://datalad-datasets.github.io/ohbm2020-posters/
    * You will be redirected to the main repository to confirm your PR. Check the remarks displayed in the `Write` section to make sure you haven't forgotten anything.
      Then, click on the green `Create pull request` button.<br><br>
      <img src="./img/datalad_OHBM2020Posters_8b.png" width="700"/>
-     
-:tada: DONE!! :tada:
 
 ## ✨ Contributors
 
