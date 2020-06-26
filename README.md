@@ -17,44 +17,43 @@
 
 ## :computer: How to Guideline
 ### :heavy_check_mark: How to Visit the OHBM2020 Posters Jitsi Rooms? 
-Go to our website: <a href="https://datalad-datasets.github.io/ohbm2020-posters/">https://datalad-datasets.github.io/ohbm2020-posters/</a> & wait for the page to load. <br><br>
+Go to our website: [https://datalad-datasets.github.io/ohbm2020-posters/](https://datalad-datasets.github.io/ohbm2020-posters/) & wait for the page to load.
+<br><br>
 <img src="./img/datalad_OHBM2020Posters_icons.png" width="700"/>
 <br><br>
 :mag::eyes::door: 
-1. <b>Searching for a Poster</b>: Enter your desired keywords (Number ID, Title, Presenter, Category/ies) in the `Search` box, click on `Enter`, and the table will be limited to the results of your search. 
-2. <b>Viewing a Poster PDF</b>: Click on the `PDF` associated with the poster you would like to "present" or "attend". Each specific poster PDF would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open.
-3. <b>Visiting a Poster Jitsi Room</b>: Click on the `jitsi:` associated with the poster you would like to "present" or "attend". Again, each specific poster Jitsi room would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open. Presenters can share their poster window by clicking on the `Share your screen` button in the bottom-left corner of the Jitsi room. <!--Jitsi requires a browser extension to provide the ability to share your desktop. We have been using Jitsi happily on Chrome/Chromium for years. <a href="https://chrome.google.com/webstore/detail/jitsi-meetings/kglhbbefdnlheedjiejgomgmfplipfeb?hl=en-US">Extension link</a>.-->
+1. **Searching for a Poster**: Enter your desired keywords (Number ID, Title, Presenter, Category/ies) in the `Search` box, click on `Enter`, and the table will be limited to the results of your search. 
+2. **Viewing a Poster PDF**: Click on the `PDF` associated with the poster you would like to "present" or "attend". Each specific poster PDF would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open.
+3. **Visiting a Poster Jitsi Room**: Click on the `jitsi:` associated with the poster you would like to "present" or "attend". Again, each specific poster Jitsi room would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open. Presenters can share their poster window by clicking on the `Share your screen` button in the bottom-left corner of the Jitsi room.
 
 *Remark*: Unfortunately, the "source" spreadsheet neither had presentation dates/times, nor URLs to PDFs. So we might improve upon that (send a PR if you see how).
 
 ### :heavy_check_mark: How to Do a Pull Request? Adding Your Poster's Info to the Table
 
-1. <b>GitHub account</b>: Create a <a href="https://github.com">GitHub account</a> if you don’t already have one. As a student, you can apply for the <a href="https://help.github.com/en/github/teaching-and-learning-with-github-education/applying-for-a-student-developer-pack">GitHub Student Developer Pack</a>, which includes offers and benefits from GitHub partners.
- 2. <b>Forking</b>: Fork https://github.com/datalad-datasets/ohbm2020-posters to create a copy of the repository on your own GitHub account.
-    * Click on `Fork` in the top-right corner of the page and choose to Fork a copy of the repository on your own GitHub account.
-    * You will automatically go to that Fork.<br>
-      <img src="./img/datalad_OHBM2020Posters_icons_2.png" width="700"/>
- 3. <b>Branching</b>: Within your Fork, create a Branch to add your poster's info to the table.
-    * Click on `Branch: gh-pages` in the semi-top-left corner of the page and write the name of your new Branch (e.g. `poster1929`) in the white rectangle under `Switch branches/tags`. Click on `Enter`.    
-    * You will automatically go to that Branch.<br>
-      <img src="./img/datalad_OHBM2020Posters_4b.png" width="250"/>
- 4. <b>Editing</b>: Within your Branch, go to the `posters-overrides.json` file & click on the pencil :pencil2: in the top-right corner of the file to edit/add your poster's info (`Video Chat` and `PDF`) to the table.<!--<br>-->
-    <!-- <img src="./img/datalad_OHBM2020Posters_icons_5.png" width="700"/> -->
-    * Search for your poster's number (e.g. `"number": 1929`).
-    * Put a comma after your poster's number (e.g. `"number": 1929,`).
-    * Copy those lines starting with `"videochat"` and `"pdf"` and paste them under your number, e.g. `"number": 1929,`. Do not forget to change `JITSI_ROOM_NAME` and `POSTER_PDF_URL` to 1) the name of your own Jitsi room and 2) the URL to your own poster.<br><br>   
-      ```json
-      {
-       "number": 1929,
-       "videochat": "<a href=\"https://meet.jit.si/JITSI_ROOM_NAME\" target=\"JITSI_ROOM_NAME\">jitsi:JITSI_ROOM_NAME</a>",
-       "pdf": "POSTER_PDF_URL"
-      }
-       ```
-5. <b>Committing</b>: Commit your changes by clicking on the green `Commit changes` button. Do not forget to add a comment, e.g. `add videochat and pdf to poster 1929`.<br><br>
+1. **GitHub account**: Create a [GitHub account](https://github.com) if you don’t already have one. As a student, you can apply for the [GitHub Student Developer Pack](https://help.github.com/en/github/teaching-and-learning-with-github-education/applying-for-a-student-developer-pack), which includes offers and benefits from GitHub partners.
+2. **Forking**: Fork https://github.com/datalad-datasets/ohbm2020-posters to create a copy of the repository on your own GitHub account.
+   * Click on `Fork` in the top-right corner of the page and choose to Fork a copy of the repository on your own GitHub account.
+   * You will automatically go to that Fork.<br>
+     <img src="./img/datalad_OHBM2020Posters_icons_2.png" width="700"/>
+3. **Branching**: Within your Fork, create a Branch to add your poster's info to the table.
+   * Click on `Branch: gh-pages` in the semi-top-left corner of the page and write the name of your new Branch (e.g. `poster1929`) in the white rectangle under `Switch branches/tags`. Click on `Enter`.    
+   * You will automatically go to that Branch.<br>
+     <img src="./img/datalad_OHBM2020Posters_4b.png" width="250"/>
+4. **Editing**: Within your Branch, go to the `posters-overrides.json` file & click on the pencil :pencil2: in the top-right corner of the file to edit/add your poster's info (`Video Chat` and `PDF`) to the table.
+   * Search for your poster's number (e.g. `"number": 1929`).
+   * Put a comma after your poster's number (e.g. `"number": 1929,`).
+   * Copy those lines starting with `"videochat"` and `"pdf"` and paste them under your number, e.g. `"number": 1929,`. Do not forget to change `JITSI_ROOM_NAME` and `POSTER_PDF_URL` to 1) the name of your own Jitsi room and 2) the URL to your own poster.<br><br>   
+     ```json
+     {
+      "number": 1929,
+      "videochat": "<a href=\"https://meet.jit.si/JITSI_ROOM_NAME\" target=\"JITSI_ROOM_NAME\">jitsi:JITSI_ROOM_NAME</a>",
+      "pdf": "POSTER_PDF_URL"
+     }
+      ```
+5. **Committing**: Commit your changes by clicking on the green `Commit changes` button. Do not forget to add a comment, e.g. `add videochat and pdf to poster 1929`.<br><br>
    <img src="./img/datalad_OHBM2020Posters_6b.png" width="700"/>
-6. <b>PR</b>: Create a pull request (PR).
-   * Within your Branch, click on the green `Compare & pull request` button.<!--<br>-->
-     <!-- <img src="./img/datalad_OHBM2020Posters_7.png" width="250"/>-->
+6. **PR**: Create a pull request (PR).
+   * Within your Branch, click on the green `Compare & pull request` button.
    * You will be redirected to the main repository to confirm your PR. Check the remarks displayed in the `Write` section to make sure you haven't forgotten anything.
      Then, click on the green `Create pull request` button.<br><br>
      <img src="./img/datalad_OHBM2020Posters_8b.png" width="700"/>
