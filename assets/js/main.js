@@ -290,15 +290,29 @@ function directory(jQuery) {
     return table;
 }
 
+let openJits = new Set();
+
+window.addEventListener("beforeunload", function(evt) {
+    openJits.forEach(id=>{
+        wss.send(JSON.stringify({action: "jitclose", id}));
+    });
+});
+
 function openJit(url, number) {
     wss.send(JSON.stringify({action: "jit", id: number}));
+    openJits.add(number);
     let child = window.open(url, "jit"+number);
     let timer = setInterval(()=>{
+        console.log(openJits);
         if(child.closed) {
             wss.send(JSON.stringify({action: "jitclose", id: number}));
+            openJits.delete(number);
             clearInterval(timer);
+        } else {
+            //still open.. let's let the server know that we are still here
+            wss.send(JSON.stringify({action: "jit", id: number}));
         }
-    }, 1000);
+    }, 1000*3);
 }
 
 function openPdf(url, number) {
