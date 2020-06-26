@@ -80,7 +80,8 @@ for n, abstr in enumerate(abstracts):
         elif h4.text.strip() == 'Authors:':
             authors = h4.find_next('div').text.strip()
             authors = re.sub(r',+(\s)*', ',', re.sub(r'\d', '', authors))
-            authors = authors.split(',')[:-1]
+            # don't accidentally drop the last author...
+            authors = [f for f in authors.split(',') if f != '']
             abstr['authors'] = authors
         # if we found keywords, make a nice list of them
         # we're lowercasing them because random ones are uppercased but we
@@ -101,4 +102,4 @@ for abstr in abstracts:
 
 # dump to json
 with open('abstract.json', 'w') as dest:
-    json.dump(abstracts, dest, indent=1, ensure_ascii=True)
+    json.dump(abstracts, dest, indent=1, ensure_ascii=False)
