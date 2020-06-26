@@ -41,7 +41,8 @@ Go to our website: <a href="https://datalad-datasets.github.io/ohbm2020-posters/
  4. <b>Editing</b>: Within your Branch, go to the `posters-overrides.json` file & click on the pencil :pencil2: in the top-right corner of the file to edit/add your poster's info (`Video Chat` and `PDF`) to the table.<!--<br>-->
     <!-- <img src="./img/datalad_OHBM2020Posters_icons_5.png" width="700"/> -->
     * Search for your poster's number (e.g. `"number": 1929`).
-    * Copy those lines starting with `"videochat"` and `"pdf"` and paste them under your number, e.g. `"number": 1929`. Do not forget to change `JITSI_ROOM_NAME` and `POSTER_PDF_URL` to 1) the name of your own Jitsi room and 2) the URL to your own poster.<br><br>   
+    * Put a comma after your poster's number (e.g. `"number": 1929,`).
+    * Copy those lines starting with `"videochat"` and `"pdf"` and paste them under your number, e.g. `"number": 1929,`. Do not forget to change `JITSI_ROOM_NAME` and `POSTER_PDF_URL` to 1) the name of your own Jitsi room and 2) the URL to your own poster.<br><br>   
       ```json
       {
        "number": 1929,
