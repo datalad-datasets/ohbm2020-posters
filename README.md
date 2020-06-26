@@ -1,54 +1,83 @@
-# OHBM2020 posters Jitsi rooms
+# :door::video_camera: OHBM2020 Posters Jitsi Rooms
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Just go to https://datalad-datasets.github.io/ohbm2020-posters/ . Wait for the page to load.
-Search for a poster by entering desired words present in the title name or presenter name or keywords and table will
-limit to the results of the search.  Click on the poster you would like to "present" or "attend", and get into a
-dedicated jitsi room.
-
-Unfortunately "source" spreadsheet neither had presentation dates/times, nor URLs to PDFs.  So we might improve upon
-that (send a PR if you see how).
-
-## Motivation
-
-As much as we had fun preparing our [Center of Open Neuroscience: DataLad, ReproNim, et al](https://ohbm.6connex.com/event/OHBMAnnualMeeting/en-us#!/CenterforOpenNeuroscience) booth, experience with the conference platform quickly
-showed its shortcomings: poster sessions seems will be limited to "open PDF, find presenter somewhere in an old
-fashion chat and 'converse' there". It is not even 2010 -- it is more of 2000.  There were discussions about
-establishing some gather.town room for poster presentations etc.  
-
-Since there is a spreadsheet with all the posters, and unique IDs for each one (but unfortunately without PDF URLs
-to be added to git-annex/DataLad), we decided to (ab)use Jitsi to provide each poster a dedicated video
- room.
+## :question: Motivation
+<p align=justify>As much as we had fun preparing our <a href="https://ohbm.6connex.com/event/OHBMAnnualMeeting/en-us#!/CenterforOpenNeuroscience">Center of Open Neuroscience: DataLad, ReproNim, et al.</a> booth, experience with the conference platform quickly showed its shortcomings: poster sessions seemed to be limited to "open a PDF, find the presenter somewhere in an old fashioned chat and 'converse' there". It is not even 2010 -- it is more of 2000. There were discussions about
+ establishing some <code>gather.town</code> room for poster presentations etc.</p>  
+<p align=justify>Since there is a spreadsheet with all the posters, and unique IDs for each one (but unfortunately without PDF URLs to be added to git-annex/DataLad), we decided to (ab)use Jitsi to provide each poster with a dedicated video room.</p>
  
-## What the heck is Jitsi?
+## :boom: What the Heck Is Jitsi?
+<p align=justify>Jitsi is your free and open source Zoom, Google Meet, whatnot... But it is more than that -- it is a decentralized, and IIRC end-to-end encrypted video conferencing system. I believe it is used by the <code>gather.town</code> that many of you got to love. Discover more on <a href="https://en.wikipedia.org/wiki/Jitsi">wikipedia:Jitsi</a>.</p>
 
-Jitsi is your free and open source Zoom, Google Meet, whatnot.  But it is more than that -- it is decentralized, and
-IIRC end-to-end encrypted video conferencing system.  I believe it is used by gather.town many of you got to love.
-Discover more on [wikipedia:Jitsi](https://en.wikipedia.org/wiki/Jitsi).
+## :arrow_forward: Implementation
+<p align=justify>This "website" is a crude lobotomization of what the basic DataLad datasets navigator <code>datalad create-sibling --with-ui</code> creates for you; <a href="https://datasets.datalad.org">https://datasets.datalad.org</a> is one of such websites.</p>
+<p align=justify>Also, if you check the git history, you will see that we have used <a href="http://handbook.datalad.org/en/latest/basics/101-109-rerun.html">datalad run</a> to annotate how <code>posters.json</code> was produced. So you can use <code>datalad rerun _produce_posters.json</code> (where <code>_produce_posters.json</code> is just a git tag) to regenerate <code>posters.json</code> using either a modified script or the original <code>.tsv</code>.</p> 
 
-## Presenters
+## :computer: How to Guideline
+### :heavy_check_mark: How to Visit the OHBM2020 Posters Jitsi Rooms? 
+Go to our website: [https://datalad-datasets.github.io/ohbm2020-posters/](https://datalad-datasets.github.io/ohbm2020-posters/) & wait for the page to load.
+<br><br>
+<img src="./img/datalad_OHBM2020Posters_icons.png" width="700"/>
+<br><br>
+:mag::eyes::door: 
+1. **Searching for a poster**: Enter your desired keywords (Number ID, Title, Presenter, Category/ies) in the `Search` box, click on `Enter`, and the table will be limited to the results of your search. 
+2. **Viewing a poster PDF**: Click on the `PDF` associated with the poster you would like to "present" or "attend". Each specific poster PDF would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open.
+3. **Visiting a poster Jitsi room**: Click on the `jitsi:` associated with the poster you would like to "present" or "attend". Again, each specific poster Jitsi room would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab/window if it was already open. Presenters can share their poster window by clicking on the `Share your screen` button in the bottom-left corner of the Jitsi room.
 
-You can share your poster window.  Jitsi requires browser extension to provide ability to share your desktop. We
-have been use Jitsi happily Chrome/Chromium for years. [Extension link](https://chrome.google.com/webstore/detail/jitsi-meetings/kglhbbefdnlheedjiejgomgmfplipfeb?hl=en-US).
+*Remark*: Unfortunately, the "source" spreadsheet neither had presentation dates/times, nor URLs to PDFs. So we might improve upon that (send a PR if you see how).
 
-## Visitors
+### :heavy_check_mark: How to Do a Pull Request? Adding Your Poster's Info to the Table
 
-Each poster would open in a new "dedicated" tab or window. Clicking on it again would just lead you to that tab
-/window if it was already open.
+1. **GitHub account**: Create a [GitHub account](https://github.com) if you don’t already have one. As a student, you can apply for the [GitHub Student Developer Pack](https://help.github.com/en/github/teaching-and-learning-with-github-education/applying-for-a-student-developer-pack), which includes offers and benefits from GitHub partners.
+2. **Forking**: Fork https://github.com/datalad-datasets/ohbm2020-posters to create a copy of the repository on your own GitHub account.
+   * Click on `Fork` in the top-right corner of the page and choose to Fork a copy of the repository on your own GitHub account.
+   * You will automatically go to that Fork.<br>
+     <img src="./img/datalad_OHBM2020Posters_icons_2.png" width="700"/>
+3. **Branching**: Within your Fork, create a Branch to add your poster's info to the table.
+   * Click on `Branch: gh-pages` in the semi-top-left corner of the page and write the name of your new Branch (e.g. `poster1929`) in the white rectangle under `Switch branches/tags`. Click on `Enter`.    
+   * You will automatically go to that Branch.<br>
+     <img src="./img/datalad_OHBM2020Posters_4b.png" width="250"/>
+4. **Editing**: Within your Branch, go to the `posters-overrides.json` file & click on the pencil :pencil2: in the top-right corner of the file to edit/add your poster's info (`Video Chat` and `PDF`) to the table.
+   * Search for your poster's number (e.g. `"number": 1929`).
+   * Which information to edit/add? 
+     - The poster information from the OHBM's "source" spreadsheet (--> only if you want to edit an error in the "number", "title", "institution", "presenter", "categories", "authors", or "keywords" fields). You can check these fields in the [`posters.json`](./posters.json) file. Click on `View raw` & search for your poster's number.  
+     - The poster Jitsi room's name & URL ("videochat" --> only if you want to edit the default Jitsi room's name & URL we've allocated to you: `jitsi:ohbm2020-POSTER_NUMBERID`).
+     - An URL to your poster PDF ("pdf").
+   * Copy those lines with the information you want to edit/add and paste them under your your poster's number. Do not forget to personalize the information after the colons! If you only want to add an URL to your poster PDF, you only need to copy-paste & personalize one line, i.e. the one starting with `"pdf"`.
+   * Always put a comma after the previous line when adding a new one (except for the last line before `]` or `}`).
+     ```json 
+     {
+      "number": 1929,
+      "title": "The rsHRF toolbox (v2.2): Additional features and analyses, and extended user documentation",
+      "institution": "Ghent University",
+      "presenter": "Sofie Van Den Bossche",
+      "categories": "Neuroinformatics and Data Sharing<br>Workflows",
+      "videochat": "<a href=\"https://meet.jit.si/rsHRF_toolbox\" target=\"_rsHRF_toolbox\">jitsi:rsHRF_toolbox</a>",
+      "pdf": "https://github.com/sofievdbos/OHBM2020/blob/master/OHBM20_SVDB_interactive.pdf",
+      "authors": [
+       "Sofie Van Den Bossche",
+       "Guorong Wu",
+       "Nigel Colenbier"
+      ],
+      "keywords": [
+       "functional mri",
+       "statistical methods",
+       "workflows",
+       "other - resting-state fmri; hemodynamic response function; toolbox; neuroinformatics"
+      ]
+     }
+      ```
+5. **Committing**: Commit your changes by clicking on the green `Commit changes` button. Do not forget to add a comment, e.g. `add videochat and pdf to poster 1929`.<br><br>
+   <img src="./img/datalad_OHBM2020Posters_6b.png" width="700"/>
+6. **PR**: Create a pull request (PR).
+   * Within your Branch, click on the green `Compare & pull request` button.
+   * You will be redirected to the main repository to confirm your PR. Check the remarks displayed in the `Write` section to make sure you haven't forgotten anything.
+     Then, click on the green `Create pull request` button.<br><br>
+     <img src="./img/datalad_OHBM2020Posters_8b.png" width="700"/>
 
-## Implementation
-
-This "website" is a crude lobotomization of the basic DataLad datasets navigator 
-`datalad create-sibling --with-ui` creates for you. https://datasets.datalad.org is one
-of such websites.
-
-Also, if you check git history, you will see that we had used [datalad run](http://handbook.datalad.org/en/latest/basics/101-109-rerun.html) to annotate how `posters.json` was produced.
-So you can use `datalad rerun _produce_posters.json` (where `_produce_posters.json` is just a git tag) to regenerate `posters.json` happen you either modified script or original `.tsv`. 
-
-
-## Contributors ✨
+## ✨ Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -70,4 +99,4 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind are welcome!
