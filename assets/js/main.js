@@ -125,7 +125,6 @@ function errorMsg(jQuery, msg) {
  * @param {object} jQuery jQuery library object
  * @param {object} md5 md5 library object
  * @param {string} url leaf url to start caching from upto root
- * @param {object} json metadata json object
  * @return {string} returns the type of the node at path
  */
 function getNodeType(jQuery, md5, url) {
@@ -179,7 +178,6 @@ function getNodeType(jQuery, md5, url) {
 /**
  * render the datatable interface based on current node metadata
  * @param {object} jQuery jQuery library object
- * @param {object} md5 md5 library object
  * @return {object} returns the rendered DataTable object
  */
 function directory(jQuery) {
@@ -198,9 +196,9 @@ function directory(jQuery) {
 
     let table = jQuery('#directory').DataTable({
         //async: true,    // async get json
-        paging: true,  // ensure scrolling instead of pages
+        paging: true,
         rowId: 'id',
-        columns: [ 
+        columns: [
           {data: "number", title: "#", width: "5%"},
           {data: "title", title: "Title", className: "dt-left", width: "42%"},
           {data: "presenter", title: "Presenter", className: "dt-center", width: "15%"},
@@ -245,7 +243,7 @@ function directory(jQuery) {
                         return '<a href="' + row.pdf + '" target="_ohbm2020_pdf_' + row.number + '">PDF</a>';
                         //return '<a href="#" onclick="openPdf('"+row.pdf+"', '"+row.number+"')">PDF</a>';
                         //return '<a href="#" onclick="openPdf("'+row.pdf+'", 1)">PDF</a>';
-                    } 
+                    }
                 },
             }
         ],
@@ -254,6 +252,19 @@ function directory(jQuery) {
 
     //load posters
     fetch("posters.json").then(res=>res.json()).then(data=>{
+        // Synchronously fetch the overrides, in order to modify posters before adding rows to the table
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "posters-overrides.json",
+            success: function (overrides) {
+                data.posters.map(
+                    function (e, i) {
+                        Object.assign(e, overrides.posters[i]);
+                    });
+            }
+        });
+
         data.posters.forEach(p=>{
             p.id = 'p'+p.number; //cannot be number (or string of number)
             p.people = 0;
