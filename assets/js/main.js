@@ -206,16 +206,17 @@ async function directory(jQuery) {
           {data: "title", title: "Title", className: "dt-left", width: "42%"},
           {data: "presenter", title: "Presenter", className: "dt-center", width: "15%"},
           {data: "categories", title: "Categories", className: "dt-left", width: "10%"},
+          {data: "software-demo", title: "Demo", className: "dt-center", width: "3%"},
           {data: "videochat", title: "Video Chat", className: "dt-left", width: "15%"},
-          {data: "people", title: "Online", className: "dt-left", width: "5%"},
-          {data: "pdf", title: "PDF", className: "dt-left", width: "8%"},
+          {data: "people", title: "Online", className: "dt-center", width: "4%"},
+          {data: "pdf", title: "PDF", className: "dt-center", width: "5%"},
           {data: "authors", visible: false},
           {data: "keywords", visible: false},
         ],
 
         columnDefs: [
             {
-                targets: 4,//video
+                targets: 5,//video
                 render(data, type, row) {
                     let name = "ohbm2020-"+row.number; //default
                     if(row.videochat) name = row.videochat; //user can override it to another jitsi name
@@ -236,13 +237,13 @@ async function directory(jQuery) {
                 },
             },
             {
-                targets: 5,//people
+                targets: 6,//people
                 render(data, type, row) {
                     return row.people||'';
                 },
             },
             {
-                targets: 6,//pdf
+                targets: 7,//pdf
                 render(data, type, row) {
                     if(row.pdf == '') {
                         return '<a href="https://github.com/datalad-datasets/ohbm2020-posters/pulls">[ADD]</a>';
@@ -287,7 +288,7 @@ async function directory(jQuery) {
             for(let key in msg.dump) {
                 let row = table.row("#p"+key);
                 if(row.length == 1) {
-                    table.cell(row, 5).data(msg.dump[key]);
+                    table.cell(row, 6).data(msg.dump[key]);
                 }
             }
             //table.draw(false);
@@ -295,7 +296,7 @@ async function directory(jQuery) {
         }
         if(msg.update) {
             let row = table.row("#p"+msg.update.id);
-            table.cell(row, 5).data(msg.update.count);
+            table.cell(row, 6).data(msg.update.count);
             needRedraw = true;
         }
     }

@@ -36,7 +36,6 @@ from itertools import chain
 
 thisfile = Path(__file__)
 infile = thisfile.parent.parent / 'OHBM 2020 Poster Numbering - AbstractsAdHocReport_2015_20200.tsv'
-sdfile = thisfile.parent.parent / 'SoftwareDemos.tsv'
 dlfile = thisfile.parent.parent / 'poster_downloads_matches.csv'
 abfile = thisfile.parent.parent / 'abstract.json'
 
@@ -52,10 +51,7 @@ with abfile.open('r') as src:
 recs = []
 overrides = []
 orig_header = ("number", "title", "presenter_first", "presenter_last", "institution", "cat1", "cat2")
-for line in chain(
-        infile.read_text().splitlines(),
-        sdfile.read_text().splitlines(),
-    ):
+for line in infile.read_text().splitlines():
     if not line.strip():
         continue
     try:
@@ -72,8 +68,10 @@ for line in chain(
         url = 'ohbm2020-{number}'.format(**rec)
         rec['videochat'] = f'<a href="https://meet.jit.si/{url}" target="_{url}">jitsi:{url}</a>'
         rec['pdf'] = rec.get('pdf', urls.get(rec['number'], ''))
-        rec['authors'] = abstracts.get(rec['number'], {}).get('authors', [])
-        rec['keywords'] = abstracts.get(rec['number'], {}).get('keywords', [])
+        abstract_info = abstracts.get(rec['number'], {})
+        rec['authors'] = abstract_info.get('authors', [])
+        rec['keywords'] = abstract_info.get('keywords', [])
+        rec['software-demo'] = abstract_info.get('software-demo', '') and 'x' or ''
         recs.append(rec)
         overrides.append({'number': rec['number']})
     except ValueError:
