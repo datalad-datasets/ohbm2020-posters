@@ -72,8 +72,10 @@ for line in chain(
         url = 'ohbm2020-{number}'.format(**rec)
         rec['videochat'] = f'<a href="https://meet.jit.si/{url}" target="_{url}">jitsi:{url}</a>'
         rec['pdf'] = rec.get('pdf', urls.get(rec['number'], ''))
-        rec['authors'] = abstracts.get(rec['number'], {}).get('authors', [])
-        rec['keywords'] = abstracts.get(rec['number'], {}).get('keywords', [])
+        abstract_info = abstracts.get(rec['number'], {})
+        rec['authors'] = abstract_info.get('authors', [])
+        rec['keywords'] = abstract_info.get('keywords', [])
+        rec['software-demo'] = abstract_info.get('software-demo', '') and 'x' or ''
         recs.append(rec)
         overrides.append({'number': rec['number']})
     except ValueError:
