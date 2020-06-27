@@ -1,0 +1,27 @@
+#extras {
+  display:block;
+  position: absolute;
+  top: 50%;
+  left: -5px;
+  transform: translate( 0, -50% );
+  width:53px;
+  height:250px;
+  background:black;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+}
+.tool {
+  margin: 10px;
+  width: 48px;
+  height: 48px;
+  font-size:38px;
+  cursor: pointer;
+}
+.feedback {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  font-size: 96px;
+  z-index:100;
+}

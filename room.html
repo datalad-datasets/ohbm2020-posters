@@ -2,11 +2,21 @@
 <html>
 <head>
     <script src='https://meet.jit.si/external_api.js'></script>
-	<script type="text/javascript" charset="utf-8" src="assets/js/reconnecting-websocket.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="assets/js/reconnecting-websocket.min.js"></script>
+    <script src="assets/js/feedback.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/room.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/feedback.css">
 </head>
 <body>
     <div id="meet"/>
+
+    <div id="extras">
+        <div class="tool" onclick="feedback('🐇')">🐇</div>
+        <div class="tool" onclick="feedback('🧠')">🧠</div>
+        <div class="tool" onclick="feedback('🥰')">🥰</div>
+        <div class="tool" onclick="feedback('🚀')">🚀</div>
+    </div>
+
     <script>
         let hash = location.hash.substring(1); //jitsi room name
         let id = hash.split(".")[0];
