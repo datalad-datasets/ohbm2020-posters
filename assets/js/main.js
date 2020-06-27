@@ -190,11 +190,11 @@ async function directory(jQuery) {
     // add HOWTO install
     jQuery('#installation').prepend(
         '<P style="margin-top: 0px;">Centralized registry of Jitsi audio-video conference rooms per each poster or software demo of OHBM 2020.</P>' +
+        '<P style="margin-top: 0px;">For every poster there is a dedicated Jitsi room, which would open in a "dedicated" new window/tab.</P>' +
         '<P style="margin-top: 0px;"><b>We turned on paging, please search by poster number, keywords, names, etc.</b></P>' +
         '<P style="margin-top: 0px;">"Online" counts are approximate and count only people attending through this page.</P>' +
-        '<P style="margin-top: 0px;">For every poster there is a dedicated Jitsi room, which would open in a "dedicated" new window/tab.</P>' +
-        '<P> More info, sources, issues, PRs:  <a href="https://github.com/datalad-datasets/ohbm2020-posters" target="_github">https://github.com/datalad-datasets/ohbm2020-posters</a>.</p>'
-        );
+        '<P> More info, sources, issues, PRs:  <a href="https://github.com/datalad-datasets/ohbm2020-posters" target="_github">https://github.com/datalad-datasets/ohbm2020-posters</a>.</p>' +
+        '<P> <b>Alternative interfaces</b>: <a href="https://brain-web.github.io/ohbm2020/" target="_brain-web">BrainWeb</a> - interactive posters map.</a>');
 
     let table = jQuery('#directory').DataTable({
         //async: true,    // async get json
