@@ -99,6 +99,19 @@
         "code",
         "ideas"
       ]
+    },
+    {
+      "login": "soichih",
+      "name": "Soichi Hayashi",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/923896?v=4",
+      "profile": "http://soichi.us",
+      "contributions": [
+        "code",
+        "design",
+        "ideas",
+        "maintenance",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
