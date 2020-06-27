@@ -21,6 +21,7 @@
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "express-ws": "^4.0.0",
-    "reconnecting-websocket": "^4.4.0"
+    "reconnecting-websocket": "^4.4.0",
+    "uuid": "^8.2.0"
   }
 }
