@@ -272,11 +272,12 @@ async function directory(jQuery) {
         Object.assign(p, o);
     });
 
-    table.rows.add(data.posters).draw();
+    table.rows.add(data.posters);
 
     wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
 
     //connect to backend
+    let needRedraw = true;
     wss.onopen = () => {
         wss.send(JSON.stringify({action: "dump"}));
     }
@@ -289,17 +290,28 @@ async function directory(jQuery) {
                     table.cell(row, 5).data(msg.dump[key]);
                 }
             }
-            table.draw();
+            //table.draw(false);
+            needRedraw = true;
         }
         if(msg.update) {
             let row = table.row("#p"+msg.update.id);
-            table.cell(row, 5).data(msg.update.count).draw();
+            table.cell(row, 5).data(msg.update.count);
+            needRedraw = true;
         }
     }
+
+    setInterval(()=>{
+        if(needRedraw) {
+            console.log("redrawing table");
+            table.draw(false);
+            needRedraw = false;
+        }
+    }, 1000);
 
     localStorage['ntCache'] = JSON.stringify(ntCache);
     return table;
 }
+
 
 function openJit(id, name) {
     window.open("room.html#"+id+"."+name);
