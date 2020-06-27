@@ -1,4 +1,7 @@
+#!/usr/bin/env node
 const express = require('express');
+const uuid = require('uuid');
+const fs = require('fs');
 const app = express();
 const expressWs = require('express-ws')(app);
 
@@ -6,27 +9,24 @@ function log(){
     let d = new Date();
     console.log(d.toLocaleString("en-US"), ...arguments);
 };
-
-var aWss = expressWs.getWss('/');
  
 /*
-app.use(function (req, res, next) {
-  console.log('middleware');
-  req.testing = 'testing';
-  return next();
-});
-*/
- 
 app.get('/', function(req, res, next){
   log('get route', req.testing);
   res.end();
 });
+ */
  
 let ips = {};
 let counts = {};
+let connections = {};
 app.ws('/', function(ws, req) {
+    ws.id = uuid.v4();
+    connections[ws.id] = ws;
+    ws.on('close',function() { 
+        delete connections[ws.id];
+    })
     ws.on('message', function(data) {
-        //console.log("message received", msg);
         try {
             //console.debug(data);
             let msg = JSON.parse(data);
@@ -51,19 +51,15 @@ app.ws('/', function(ws, req) {
                 }
                 console.dir(ips[msg.id]);
                 counts[msg.id] = ips[msg.id].length;
-                aWss.clients.forEach(function (client) {
-                    client.send(JSON.stringify({update: {id: msg.id, count: counts[msg.id]}}));
-                });
+                broadcast({update: {id: msg.id, count: counts[msg.id]}});
                 break;
             case "jitclose":
                 log("jitclose:", ip, msg.id);
-                if(!ips[msg.id]) ips[msg.id] = []; //could hapen
+                if(!ips[msg.id]) ips[msg.id] = []; //did happen..
                 entry = ips[msg.id].find(c=>ip == ip);
                 ips[msg.id].splice(ips[msg.id].indexOf(entry), 1);
                 counts[msg.id] = ips[msg.id].length;
-                aWss.clients.forEach(function (client) {
-                    client.send(JSON.stringify({update: {id: msg.id, count: counts[msg.id]}}));
-                });
+                broadcast({update: {id: msg.id, count: counts[msg.id]}});
                 if(counts[msg.id] == 0) delete counts[msg.id];
                 break;
             }
@@ -73,11 +69,20 @@ app.ws('/', function(ws, req) {
     });
 });
 
+function broadcast(msg) {
+    for(let id in connections) {
+        if(connections[id].readyState == 1) connections[id].send(JSON.stringify(msg));
+    }
+}
+
 setInterval(()=>{
+    log("running periodic maintenance");
+
+    //clean up old connections (client disappeard without jitclose?)
     for(let id in ips) {
         let recents = [];
         let recent = new Date();
-        recent.setTime(recent.getTime() - 1000*60*5); //we can shorten this now that clients are polling
+        recent.setTime(recent.getTime() - 1000*60*120);  
         ips[id].forEach(rec=>{
             if(rec.date > recent) recents.push(rec);
         });
@@ -86,12 +91,30 @@ setInterval(()=>{
             log("expire:", id);
             //need to update the counts
             counts[id] = ips[id].length;
-            aWss.clients.forEach(function (client) {
-                client.send(JSON.stringify({update: {id, count: counts[id]}}));
-            });
+            broadcast({update: {id, count: counts[id]}});
+            if(counts[id] == 0) delete counts[id];
         }
     }
-}, 1000*60);
- 
+
+    log("writing out sensu metrics");
+
+    //output sensu metrics
+    let d = new Date();
+    const time = Math.round(d.getTime()/1000);
+    let metrics = "";
+    for(let id in counts) {
+        metrics += "prod.ohbm2020.poster.people."+id+" "+counts[id]+" "+time+"\n";
+    }
+    console.log(metrics);
+    fs.writeFileSync("/tmp/metrics.sensu", metrics);
+    log("done maintenance");
+
+}, 1000*60*5);
+
+log("--------------------------------------------------------------------------");
 log("listening");
+log("--------------------------------------------------------------------------");
 app.listen(3000);
+
+
+
