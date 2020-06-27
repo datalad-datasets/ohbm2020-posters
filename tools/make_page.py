@@ -36,7 +36,6 @@ from itertools import chain
 
 thisfile = Path(__file__)
 infile = thisfile.parent.parent / 'OHBM 2020 Poster Numbering - AbstractsAdHocReport_2015_20200.tsv'
-sdfile = thisfile.parent.parent / 'SoftwareDemos.tsv'
 dlfile = thisfile.parent.parent / 'poster_downloads_matches.csv'
 abfile = thisfile.parent.parent / 'abstract.json'
 
@@ -52,10 +51,7 @@ with abfile.open('r') as src:
 recs = []
 overrides = []
 orig_header = ("number", "title", "presenter_first", "presenter_last", "institution", "cat1", "cat2")
-for line in chain(
-        infile.read_text().splitlines(),
-        sdfile.read_text().splitlines(),
-    ):
+for line in infile.read_text().splitlines():
     if not line.strip():
         continue
     try:
