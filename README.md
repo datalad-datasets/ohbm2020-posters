@@ -1,6 +1,6 @@
 # :door::video_camera: OHBM2020 Posters Jitsi Rooms
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## :question: Motivation
@@ -96,6 +96,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/bpoldrack"><img src="https://avatars2.githubusercontent.com/u/10498301?v=4" width="100px;" alt=""/><br /><sub><b>Benjamin Poldrack</b></sub></a><br /><a href="https://github.com/datalad-datasets/ohbm2020-posters/commits?author=bpoldrack" title="Code">💻</a> <a href="#userTesting-bpoldrack" title="User Testing">📓</a></td>
+    <td align="center"><a href="http://emdupre.me"><img src="https://avatars3.githubusercontent.com/u/15017191?v=4" width="100px;" alt=""/><br /><sub><b>Elizabeth DuPre</b></sub></a><br /><a href="https://github.com/datalad-datasets/ohbm2020-posters/commits?author=emdupre" title="Code">💻</a> <a href="#ideas-emdupre" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
