@@ -115,6 +115,7 @@
     }
   ],
   "contributorsPerLine": 7,
+  "contributorsSortAlphabetically": true,
   "projectName": "ohbm2020-posters",
   "projectOwner": "datalad-datasets",
   "repoType": "github",
