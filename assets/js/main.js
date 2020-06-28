@@ -223,7 +223,7 @@ async function directory(jQuery) {
                     if(row.videochat && row.videochat.startsWith("http")) {
                         //or use custom url
                         return `
-                            <a href="${row.videochat}" targer="ohbm2020_${row.number}" target="room_${row.number}">
+                            <a href="${row.videochat}" target="room_${row.number}">
                                 custom url
                             </a>
                         `;
