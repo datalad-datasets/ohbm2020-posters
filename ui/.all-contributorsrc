@@ -1,0 +1,79 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "christian-monch",
+      "name": "Christian Mönch",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17925232?v=4",
+      "profile": "https://github.com/christian-monch",
+      "contributions": [
+        "code",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "yarikoptic",
+      "name": "Yaroslav Halchenko",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/39889?v=4",
+      "profile": "http://www.onerussian.com",
+      "contributions": [
+        "code",
+        "infra",
+        "maintenance",
+        "ideas",
+        "design",
+        "projectManagement",
+        "talk"
+      ]
+    },
+    {
+      "login": "nicholst",
+      "name": "Thomas Nichols",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/5155907?v=4",
+      "profile": "http://www.nisox.org",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "effigies",
+      "name": "Chris Markiewicz",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/83442?v=4",
+      "profile": "https://github.com/effigies",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "rmarkello",
+      "name": "Ross Markello",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/14265705?v=4",
+      "profile": "http://rossmarkello.com",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "adswa",
+      "name": "Adina Wagner",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/29738718?v=4",
+      "profile": "http://www.adina-wagner.com",
+      "contributions": [
+        "maintenance"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "ohbm2020-posters",
+  "projectOwner": "datalad-datasets",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
