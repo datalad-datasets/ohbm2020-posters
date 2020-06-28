@@ -223,13 +223,13 @@ async function directory(jQuery) {
                     if(row.videochat && row.videochat.startsWith("http")) {
                         //or use custom url
                         return `
-                            <a href="${row.videochat}" targer="ohbm2020_${row.number}">
+                            <a href="${row.videochat}" target="room_${row.number}">
                                 custom url
                             </a>
                         `;
                     } else {
                         return `
-                            <a href="#" onclick="openJit('${row.number}', '${name}')">
+                            <a href="room.html#${row.number}.${name}" target="room_${row.number}">
                                 jitsi://${name}
                             </a>
                         `;
@@ -311,10 +311,5 @@ async function directory(jQuery) {
 
     localStorage['ntCache'] = JSON.stringify(ntCache);
     return table;
-}
-
-
-function openJit(id, name) {
-    window.open("room.html#"+id+"."+name);
 }
 
