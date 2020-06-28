@@ -82,7 +82,7 @@ setInterval(()=>{
     for(let id in ips) {
         let recents = [];
         let recent = new Date();
-        recent.setTime(recent.getTime() - 1000*60*120);  
+        recent.setTime(recent.getTime() - 1000*60*3);  
         ips[id].forEach(rec=>{
             if(rec.date > recent) recents.push(rec);
         });
