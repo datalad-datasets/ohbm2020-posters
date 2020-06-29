@@ -17,7 +17,7 @@
     "jquery": "^3.4.1",
     "popper.js": "^1.12.9",
     "reconnecting-websocket": "^4.4.0",
-    "vue": "^2.5.2",
+    "vue": "^2.6.11",
     "vue-calendar-heatmap": "^0.8.4",
     "vue-github": "^0.11.2",
     "vue-github-activity": "^2.1.1",

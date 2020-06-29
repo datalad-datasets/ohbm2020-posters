@@ -28,20 +28,21 @@
         </div>
 
         <div class="search">
-            <b-form-input v-model="search" placeholder="Search Posters / Demos" debounce="500"></b-form-input>
+            <b-form-input v-model="search" placeholder="Search Posters / Demos" debounce="500"/>
             <div class="adsearch">
             <b-row>
                 <b-col>
-                    <b-form-checkbox v-model="filterOnline">Only show entries with someone on the video chat</b-form-checkbox>
-                    <br>
+                    <b-form-group label="Also Filter By">
+                        <b-form-checkbox v-model="filterOnline">Only show entries with someone on the video chat</b-form-checkbox>
+                    </b-form-group>
                 </b-col>
 
                 <b-col>
                     <b-form-group label="Entry Type">
                         <b-form-radio-group v-model="filterEntry">
-                            <b-form-radio value="any">Any</b-form-radio><br>
-                            <b-form-radio value="demo">Software Demo</b-form-radio><br>
-                            <b-form-radio value="nondemo">Non Demo</b-form-radio><br>
+                            <b-form-radio value="any">Any</b-form-radio>
+                            <b-form-radio value="demo">Software Demo</b-form-radio>
+                            <b-form-radio value="nondemo">Non Demo</b-form-radio>
                         </b-form-radio-group>
                     </b-form-group>
                 </b-col>
@@ -69,7 +70,7 @@
 
         <div class="content">
             <div v-if="posters">
-                <poster v-for="poster in filteredPosters" :key="poster.number" :data="poster"/>
+                <poster ref="poster" v-for="poster in posters" :key="poster.number" :data="poster"/>
             </div>
         </div>
     </b-container>
@@ -77,7 +78,7 @@
     <b-container v-if="posters">
         <br clear="all">
         <p style="margin: 10px; padding: 10px; border-top: 1px solid #0001; opacity: 0.5;">
-            Showing {{filteredPosters.length}} entires</small>
+            Showing {{posters.filter(p=>p.match).length}} entires</small>
         </p>
     </b-container>
 </div>
@@ -110,10 +111,24 @@ export default {
             catFilter: [],
         }
     },
+    watch: {
+        search() {
+            this.applyFilter();
+        },
+        filterOnline() {
+            this.applyFilter();
+        },
+        filterEntry() {
+            this.applyFilter();
+        },
+        catFilter() {
+            this.applyFilter();
+        },
+    },
 
     mounted() {
         this.loadData().then(()=>{
-            console.log("done loading posters.. now connecting to ws for online update");
+            //console.log("done loading posters.. now connecting to ws for online update");
             this.wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
             this.wss.onopen = () => {
                 this.wss.send(JSON.stringify({action: "dump"}));
@@ -131,11 +146,34 @@ export default {
                     poster.people = msg.update.count;
                 }
             }
-
         });
+
+        window.addEventListener('scroll', this.checkVisibility);
+        window.addEventListener('resize', this.checkVisibility);
+    },
+
+    destroyed() {
+        window.removeEventListener('scroll', this.checkVisibility);
+        window.removeEventListener('resize', this.checkVisibility);
     },
 
     methods: {
+        checkVisibility(e) {
+            //find visible posters
+            let vs = new Set();
+            this.$refs["poster"].forEach(p=>{
+                let ptop = p.$el.offsetTop;
+                let pheight = p.$el.offsetHeight;
+                if( ptop > window.scrollY && ptop < window.scrollY + window.innerHeight ||
+                    ptop+pheight > window.scrollY && ptop+pheight < window.scrollY + window.innerHeight) {
+                    vs.add(p.data.number);
+                }
+            });
+            this.posters.forEach(p=>{
+                if(vs.has(p.number)) p.visible = true;
+            });
+        },
+
         async loadData() {
             //load posters
             let res = await fetch("//datalad-datasets.github.io/ohbm2020-posters/posters.json");
@@ -154,12 +192,15 @@ export default {
 
             //clean up a bit
             data.posters.forEach(p=>{
-                p.id = 'p'+p.number; //cannot be number (or string of number)
+                //p.id = 'p'+p.number; //cannot be number (or string of number)
                 p.people = 0;
                 if(p.categories.includes("<br>")) p.categories = p.categories.split("<br>");
                 if(p.categories.includes(",")) p.categories = p.categories.split(",");
                 p.categories = p.categories.filter(cat=>cat != "");
                 p.isDemo = (p["software-demo"] == "x");
+
+                p.match = true;
+                p.visible = false;
             });
 
             //list all categories
@@ -174,16 +215,19 @@ export default {
             this.categories.sort();
 
             this.posters = data.posters;
+            this.$nextTick(()=>{
+                this.checkVisibility();
+            });
         },
-    },
+        applyFilter() { 
+            if(!this.posters) return; //not yet loaded
 
-    computed: {
-        filteredPosters() { 
-            console.log("applying filter");
+            //console.log("applying filter..");
+            //console.time("filter");
             let searchTokens;
             if(this.search.trim() != "") searchTokens = this.search.trim().toLowerCase().split(" ");
-            return this.posters.filter(p=>{
-                        
+
+            function filter(p) {
                 if(this.filterOnline && p.people == 0) return false;
 
                 if(this.filterEntry == "demo" && !p.isDemo) return false;
@@ -213,8 +257,18 @@ export default {
                 }
 
                 return true;
+            }
+
+            this.posters.forEach(p=>{
+                p.match = filter.call(this, p);
+            });
+            this.$nextTick(()=>{
+                this.checkVisibility();
             });
         },
+    },
+
+    computed: {
     },
 }
 </script>
