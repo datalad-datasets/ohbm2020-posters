@@ -70,7 +70,7 @@
 
         <div class="content">
             <div v-if="posters">
-                <poster ref="poster" v-for="poster in posters" :key="poster.number" :data="poster"/>
+                <poster ref="poster" v-for="poster in posters" :key="poster.number" :data="poster" @addCat="addCat" @addToken="addToken"/>
             </div>
         </div>
     </b-container>
@@ -158,6 +158,13 @@ export default {
     },
 
     methods: {
+        addToken(token) {
+            this.search += " "+token;
+        },
+        addCat(cat) {
+            this.catFilter.push(cat);
+        },
+
         checkVisibility(e) {
             //find visible posters
             let vs = new Set();
@@ -246,16 +253,18 @@ export default {
                 if(searchTokens) {
                     //make sure something matches each token
                     for(let token of searchTokens) {
-                        if(p.number == token) return true;
-                        if(title.includes(token)) return true;
-                        if(inst.includes(token)) return true;
-                        if(presenter.includes(token)) return true;
-                        if(categories.includes(token)) return true;
-                        if(authors.includes(token)) return true;
+                        if(p.number == token) continue;
+                        if(title.includes(token)) continue;
+                        if(inst.includes(token)) continue;
+                        if(presenter.includes(token)) continue;
+                        if(categories.includes(token)) continue;
+                        if(authors.includes(token)) continue;
+                        return false;
                     }
-                    return false;
+                    return true;
                 }
 
+                //no filter?
                 return true;
             }
 
