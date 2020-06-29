@@ -11,6 +11,7 @@ function feedbackAnimationStep(timer, elem) {
     elem.remove();
   }
 }
+
 function feedbackAnimation(emoji) {
   const elem = document.createElement('div');
   elem.innerText = emoji;
@@ -22,23 +23,12 @@ function feedbackAnimation(emoji) {
     feedbackAnimationStep(timer, elem);
   }, 25);
 }
+
 function feedback(emoji) {
   feedbackAnimation(emoji);
   broadcastMessage({type:"feedback", emoji});
 }
-api.addEventListener('endpointTextMessageReceived', (rawMsg) => {
-  const text = rawMsg.data.eventData.text;
-  const msg = JSON.parse(text);
-  switch(msg.type) {
-    case "feedback":
-      const emoji = msg.emoji;
-      feedbackAnimation(emoji);
-      break;
-    case "clap":
-      playClapSound();
-      break;
-  }
-});
+
 function broadcastMessage(msg) {
   for(const participant in api._participants) {
     let send = true;
@@ -51,4 +41,20 @@ function broadcastMessage(msg) {
     }
     api.executeCommand('sendEndpointTextMessage', participant, JSON.stringify(msg));
   }
+}
+
+function addDataChannelListener() {
+  api.addEventListener('endpointTextMessageReceived', (rawMsg) => {
+    const text = rawMsg.data.eventData.text;
+    const msg = JSON.parse(text);
+    switch(msg.type) {
+      case "feedback":
+        const emoji = msg.emoji;
+        feedbackAnimation(emoji);
+        break;
+      case "clap":
+        playClapSound();
+        break;
+    }
+  });
 }
