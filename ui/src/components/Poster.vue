@@ -29,12 +29,18 @@
         <br>
 
         <span class="presenter clickable" @click="addToken(data.presenter)">{{data.presenter}}</span> -
-        <span class="inst clickable" @click="addToken(data.institution)">{{data.institution}}</span>
+        <div class="insts" style="display: inline-block;">
+            <span v-for="(inst, idx) in data.institution" :key="idx" class="inst clickable" @click="addToken(inst)">
+                <small style="opacity: 0.5" v-if="idx > 0">|</small>
+                {{inst}} 
+            </span>
+        </div>
         <br>
 
         <div class="authors">
             <span class="author clickable" v-for="(author, idx) in data.authors" :key="idx" @click="addToken(author)">
-                {{author}} <small style="opacity: 0.5">|</small>&nbsp;
+                <small style="opacity: 0.5" v-if="idx > 0">|</small>
+                {{author}}
             </span>
         </div>
         <br>
@@ -48,8 +54,6 @@
 <script>
 
 import Vue from 'vue'
-//import checkView from 'vue-check-view'
-//Vue.use(checkView)
 
 let catColors = {};
 
@@ -60,7 +64,7 @@ export default {
             if(catColors[cat]) return catColors[cat];
             let hash = cat.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
             let numhash = Math.abs(hash+120)%360;
-            let color = "hsl("+(numhash%360)+", 50%, 55%)"
+            let color = "hsl("+(numhash%360)+", 50%, 56%)"
             catColors[cat] = color;
             return color;
         },
@@ -77,11 +81,6 @@ export default {
             }
         },
 
-        /*
-        onView(e) {
-            if(e.type == "enter") this.show = true;
-        },
-        */
         addToken(token) {
             this.$emit("addToken", token);
         },

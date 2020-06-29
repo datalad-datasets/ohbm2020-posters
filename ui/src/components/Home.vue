@@ -28,7 +28,10 @@
         </div>
 
         <div class="search">
-            <b-form-input v-model="search" placeholder="Search Posters / Demos" debounce="500"/>
+            <b-icon icon="search" aria-hidden="true" class="searchicon" scale="1.5"/>
+            <b-icon icon="x" aria-hidden="true" class="clearicon" scale="2" @click="clear" title="Clear Filters"/>
+            <b-form-input v-model="search" placeholder="Search Posters / Demos" debounce="500">
+            </b-form-input>
             <div class="adsearch">
             <b-row>
                 <b-col>
@@ -52,12 +55,6 @@
                         <v-select multiple v-model="catFilter" :options="categories" style="background-color: white;"></v-select>
                     </b-form-group>
                 </b-col>
-
-                <!--
-                <b-form-group label="Categories">
-                    <b-form-checkbox v-for="cat in categories" v-model="catFilter[cat]">{{cat}}</b-form-checkbox>
-                </b-form-group>
-                -->
             </b-row>
             </div>
         </div>
@@ -87,15 +84,19 @@
 <script>
 
 import Poster from '@/components/Poster.vue'
-import { BIcon, BIconArrowClockwise } from 'bootstrap-vue'
+import { 
+    BIcon, 
+    BIconArrowClockwise, 
+    BIconSearch,
+    BIconX,
+ } from 'bootstrap-vue'
 
 import ReconnectingWebSocket from 'reconnecting-websocket';
 
 export default {
     components: {
         Poster,
-        BIcon,
-        BIconArrowClockwise,
+        BIcon, BIconArrowClockwise, BIconSearch, BIconX,
     },
 
     data() {
@@ -164,6 +165,13 @@ export default {
         addCat(cat) {
             this.catFilter.push(cat);
         },
+        
+        clear() {
+            this.search = "";
+            this.filterOnline = false;
+            this.filterEntry = "any";
+            this.catFilter = [];
+        },
 
         checkVisibility(e) {
             //find visible posters
@@ -206,6 +214,8 @@ export default {
                 p.categories = p.categories.filter(cat=>cat != "");
                 p.isDemo = (p["software-demo"] == "x");
 
+                if(!Array.isArray(p.institution)) p.institution = [p.institution];
+
                 p.match = true;
                 p.visible = false;
             });
@@ -241,7 +251,7 @@ export default {
                 if(this.filterEntry == "nondemo" && p.isDemo) return false;
 
                 let title = p.title.toLowerCase();
-                let inst = p.institution.toLowerCase();
+                let inst = p.institution.toString().toLowerCase();
                 let presenter = p.presenter.toLowerCase();
                 let categories = p.categories.toString().toLowerCase();
                 let authors = p.authors.toString().toLowerCase();
@@ -291,15 +301,33 @@ color: #666;
 .search {
 padding-top: 20px;
 padding-bottom: 50px;
+position: relative;
 }
 .search input {
 border-radius: 0;
 font-size: 1.5rem;
 border: none;
 box-shadow: 2px 2px 3px #0001;
+padding-left: 60px;
 }
 .search input::placeholder {
 opacity: 0.4;
+}
+.search .searchicon {
+position: absolute;
+top: 39px;
+left: 22px;
+opacity: 0.2;
+}
+.search .clearicon {
+position: absolute;
+cursor: pointer;
+top: 36px;
+right: 22px;
+opacity: 0.7;
+}
+.search .clearicon:hover {
+opacity: 1;
 }
 /*
 .side {
