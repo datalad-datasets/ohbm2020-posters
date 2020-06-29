@@ -19,11 +19,11 @@
             For every poster there is a dedicated Jitsi room, which would open in a "dedicated" new window/tab.
             Please search by poster number, keywords, names, etc.
             Posters with non-0 people on the video chat are shown with a persistent "online" counts. The counts are approximate and count only people attending through this page.
-            More info, sources, issues, PRs: <a href="https://github.com/datalad-datasets/ohbm2020-posters.">https://github.com/datalad-datasets/ohbm2020-posters.</a>
+            More info, sources, issues, PRs: <a href="https://github.com/datalad-datasets/ohbm2020-posters">https://github.com/datalad-datasets/ohbm2020-posters</a>.
             </p>
             
             <p>
-                Alternative interface: <a href="https://brain-web.github.io/ohbm2020/">BrainWeb</a> - interactive posters map.
+                Alternative interfaces: <a href="https://brain-web.github.io/ohbm2020/">BrainWeb</a> - interactive posters map. <a href="index_orig.html">Old Version</a>
             </p>
         </div>
 
