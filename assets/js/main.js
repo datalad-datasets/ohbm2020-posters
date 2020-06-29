@@ -194,7 +194,7 @@ async function directory(jQuery) {
         '<P style="margin-top: 0px;"><b>We turned on paging, please search by poster number, keywords, names, etc.</b></P>' +
         '<P style="margin-top: 0px;">"Online" counts are approximate and count only people attending through this page.</P>' +
         '<P> More info, sources, issues, PRs:  <a href="https://github.com/datalad-datasets/ohbm2020-posters" target="_github">https://github.com/datalad-datasets/ohbm2020-posters</a>.</p>' +
-        '<P> <b>Alternative interfaces</b>: <a href="https://brain-web.github.io/ohbm2020/" target="_brain-web">BrainWeb</a> - interactive posters map.</a>');
+        '<P> <b>Alternative interfaces</b>: <a href="https://brain-web.github.io/ohbm2020/" target="_brain-web">BrainWeb</a> - interactive posters map, <a href="index_beta.html" target="_vue-ui">Vue based interface (beta)</a></a>');
 
     let table = jQuery('#directory').DataTable({
         //async: true,    // async get json
