@@ -29,12 +29,18 @@
         <br>
 
         <span class="presenter clickable" @click="addToken(data.presenter)">{{data.presenter}}</span> -
-        <span class="inst clickable" @click="addToken(data.institution)">{{data.institution}}</span>
+        <div class="insts" style="display: inline-block;">
+            <span v-for="(inst, idx) in data.institution" :key="idx" class="inst clickable" @click="addToken(inst)">
+                <small style="opacity: 0.5" v-if="idx > 0">|</small>
+                {{inst}} 
+            </span>
+        </div>
         <br>
 
         <div class="authors">
             <span class="author clickable" v-for="(author, idx) in data.authors" :key="idx" @click="addToken(author)">
-                {{author}} <small style="opacity: 0.5">|</small>&nbsp;
+                <small style="opacity: 0.5" v-if="idx > 0">|</small>
+                {{author}}
             </span>
         </div>
         <br>
