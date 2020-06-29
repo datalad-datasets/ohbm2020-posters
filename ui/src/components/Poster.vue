@@ -2,13 +2,13 @@
 <div class="poster" v-show="data.match">
     <div v-if="data.visible">
         <h3 class="number"><b-badge variant="light">{{data.number}}</b-badge></h3>
-        <h4 class="demo" v-if="data.isDemo"><b-badge variant="danger">Software DEMO</b-badge></h4>
         <b-button variant="primary" size="sm" class="chatbutton" :class="{online: data.people>0}" @click="openChat">
             Video Chat <span v-if="data.people>0"> ({{data.people}} people online)</span>
         </b-button> 
 
         <p class="pdf">
             <a v-if="data.pdf" :href="data.pdf" :target="'pdf_'+data.number">
+                <span class="openpdflabel">Open PDF</span>
                 <img v-lazy="$root.thumbsUrl+'/'+data.number+'.x200.jpg'" height="200px" class="thumbnail" 
                     data-error="$root.thumbsUrl+'/'+noposter.jpg"/>
             </a>
@@ -19,20 +19,23 @@
                 </div>
             </a>
         </p>
+        <b-badge variant="danger" v-if="data.isDemo">Software DEMO</b-badge>
         <span class="title"><i>{{data.title}}</i></span>
         <br>
 
-        <div v-for="(cat, idx) in data.categories" :key="idx" class="cat">
+        <div v-for="(cat, idx) in data.categories" :key="idx" class="cat clickable" @click="addCat(cat)">
             <span :style="{backgroundColor: catColor(cat)}" class="catbull">&nbsp;</span> {{cat}}
         </div>
         <br>
 
-        <span class="presenter">{{data.presenter}}</span> -
-        <span class="inst">{{data.institution}}</span>
+        <span class="presenter clickable" @click="addToken(data.presenter)">{{data.presenter}}</span> -
+        <span class="inst clickable" @click="addToken(data.institution)">{{data.institution}}</span>
         <br>
 
         <div class="authors">
-            <span class="author" v-for="(author, idx) in data.authors" :key="idx">{{author}} <small style="opacity: 0.5">|</small>&nbsp;</span>
+            <span class="author clickable" v-for="(author, idx) in data.authors" :key="idx" @click="addToken(author)">
+                {{author}} <small style="opacity: 0.5">|</small>&nbsp;
+            </span>
         </div>
         <br>
 
@@ -79,6 +82,12 @@ export default {
             if(e.type == "enter") this.show = true;
         },
         */
+        addToken(token) {
+            this.$emit("addToken", token);
+        },
+        addCat(cat) {
+            this.$emit("addCat", cat);
+        },
     },
     data() {
         return {
@@ -163,15 +172,37 @@ color: #666;
 .thumbnail {
 background-color: #eee; 
 box-shadow: 1px 1px 2px #0001;
+border: 3px solid white;
+}
+.openpdflabel {
+position: absolute;
+top: 5px;
+left: 5px;
+color: white;
+background-color: #666;
+padding: 6px 8px;
+border-radius: 3px;
+display: none;
+}
+.poster:hover .thumbnail {
+border: 3px solid #0006;
+}
+.poster:hover .openpdflabel {
+display: block;
 }
 .chatbutton {
 position: absolute;
-bottom: 10px;
-left: 10px;
+top: 174px;
+left: 5px;
 display: none;
 }
 .chatbutton.online, 
 .poster:hover .chatbutton {
 display: block;
+}
+.clickable:hover {
+cursor: pointer;
+background-color: #eee;
+color: #007bff;
 }
 </style>

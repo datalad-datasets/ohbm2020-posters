@@ -22,6 +22,14 @@ export default {
             roomName,
             parentNode: document.querySelector('#meet')
         })
+        /*
+        api.addListener("videoConferenceJoined", () => {
+             this.jitsiAPI.executeCommands({
+                  displayName: ["Soichi"],
+                  subject: ["test"]
+             })
+        });
+        */
 
         let wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
         wss.onopen = () => {
