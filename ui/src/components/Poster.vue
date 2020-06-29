@@ -8,9 +8,15 @@
         </b-button> 
 
         <p class="pdf">
-            <a :href="data.pdf" :target="'pdf_'+data.number">
+            <a v-if="data.pdf" :href="data.pdf" :target="'pdf_'+data.number">
                 <img v-lazy="$root.thumbsUrl+'/'+data.number+'.x200.jpg'" height="200px" class="thumbnail" 
                     data-error="$root.thumbsUrl+'/'+noposter.jpg"/>
+            </a>
+            <a href="https://github.com/datalad-datasets/ohbm2020-posters/edit/gh-pages/posters-overrides.json">
+                <div v-if="!data.pdf" class="pdfmissing">
+                        We couldn't find your PDF!
+                        Please edit overrides.json and send us the PR.
+                </div>
             </a>
         </p>
         <span class="title"><i>{{data.title}}</i></span>
@@ -21,7 +27,7 @@
         </div>
         <br>
 
-        <span class="presenter">{{data.presenter}}</span> |
+        <span class="presenter">{{data.presenter}}</span> -
         <span class="inst">{{data.institution}}</span>
         <br>
 
@@ -53,6 +59,7 @@ export default {
             let numhash = Math.abs(hash+120)%360;
             let color = "hsl("+(numhash%360)+", 50%, 55%)"
             catColors[cat] = color;
+            return color;
         },
     
         openChat() {
@@ -76,7 +83,10 @@ export default {
     data() {
         return {
         }
-    }
+    },
+    mounted() { 
+        
+    },
 }
 </script>
 
@@ -108,6 +118,18 @@ left: 5px;
 }
 .pdf {
 margin-bottom: 0;
+}
+.pdfmissing {
+display: inline-block;
+height: 200px;
+width: 200px;
+background-color: #bbb;
+color: #fff9;
+padding: 20px;
+}
+.pdfmissing:hover {
+color: #333;
+text-decoration: underline;
 }
 .number {
 opacity: 0.8;
