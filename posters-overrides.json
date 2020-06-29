@@ -3339,7 +3339,13 @@
   },
   {
    "number": 1186
-  },
+   "title": "Permutation inference for canonical correlation analysis (CCA)",
+   "institution": ["National Institutes of Health (NIH)", "University of Geneva", "University of Oxford"],
+   "presenter": "Anderson M. Winkler",
+   "categories": ["Statistics", "Modelling", "Analysis"],
+   "pdf": "https://s3.us-east-2.amazonaws.com/brainder/publications/2020/SOHBM2020-PermCCA.pdf",  
+   "authors": [ "Anderson M. Winkler", "Olivier Renaud", "Stephen M. Smith", "Thomas E. Nichols" ],
+   "keywords": [ "permutation tests", "canonical correlation analysis", "multivariate statistics"] }
   {
    "number": 1187
   },
