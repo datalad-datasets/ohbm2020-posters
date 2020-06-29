@@ -6,12 +6,27 @@
                 <img src="@/assets/img/datalad_logo.svg" align="right" width="100px">
             </a>
             <h1><b>OHBM2020 Posters</b></h1>
+            <p>
+                Centralized registry of Jitsi audio-video conference rooms per each poster or software demo of OHBM 2020.
+            </p>
+        </div>
+
+        <div class="instruction">
+            <p>
+            For every poster there is a dedicated Jitsi room, which would open in a "dedicated" new window/tab.
+            Please search by poster number, keywords, names, etc.
+            Posters with non-0 people on the video chat are shown with a persistent "online" counts. The counts are approximate and count only people attending through this page.
+            More info, sources, issues, PRs: <a href="https://github.com/datalad-datasets/ohbm2020-posters.">https://github.com/datalad-datasets/ohbm2020-posters.</a>
+            </p>
+            
+            <p>
+                Alternative interface: <a href="https://brain-web.github.io/ohbm2020/">BrainWeb</a> - interactive posters map.
+            </p>
         </div>
 
         <div class="search">
             <b-form-input v-model="search" placeholder="Search Posters / Demos" debounce="500"></b-form-input>
-            <br>
-            <div style="font-size: 70%; background-color: #f7f7f7; margin: 10px; padding: 10px;">
+            <div class="adsearch">
             <b-row>
                 <b-col>
                     <b-form-checkbox v-model="filterOnline">Only show entries with someone on the video chat</b-form-checkbox>
@@ -232,5 +247,9 @@ margin-right: 210px;
 .loading {
 font-size: 150%;
 opacity: 0.5;
+}
+.adsearch {
+font-size: 80%; 
+margin-top: 10px;
 }
 </style>

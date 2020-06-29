@@ -15,10 +15,9 @@
     <span class="title"><i>{{data.title}}</i></span>
     <br>
 
-    <b-badge pill v-for="(cat, idx) in data.categories" :key="idx" 
-        class="cat" 
-        :style="{backgroundColor: catColor(cat)}">{{cat}}
-    </b-badge>
+    <div v-for="(cat, idx) in data.categories" :key="idx" class="cat">
+        <span :style="{backgroundColor: catColor(cat)}" class="catbull">&nbsp;</span> {{cat}}
+    </div>
     <br>
 
     <span class="presenter">{{data.presenter}}</span> |
@@ -116,7 +115,12 @@ font-weight: bold;
 font-size: 80%;
 }
 .cat {
+display: inline-block;
 margin-right: 5px;
+font-size: 85%;
+}
+.catbull {
+width: 10px;
 }
 .authors {
 font-size: 80%;
