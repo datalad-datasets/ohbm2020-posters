@@ -21,8 +21,6 @@
 
 <script>
 import Vue from 'vue';
-import BootstrapVue from 'bootstrap-vue';
-Vue.use(BootstrapVue);
 
 export default {
     name: 'app'
@@ -30,8 +28,9 @@ export default {
 </script>
 
 <style>
-html, body {
-background-color: #eee;
+html, 
+body {
+background-color: #eee !important;
 color: #333;
 }
 h1 {
