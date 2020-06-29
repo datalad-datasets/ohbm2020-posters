@@ -48,8 +48,6 @@
 <script>
 
 import Vue from 'vue'
-//import checkView from 'vue-check-view'
-//Vue.use(checkView)
 
 let catColors = {};
 
@@ -60,7 +58,7 @@ export default {
             if(catColors[cat]) return catColors[cat];
             let hash = cat.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
             let numhash = Math.abs(hash+120)%360;
-            let color = "hsl("+(numhash%360)+", 50%, 55%)"
+            let color = "hsl("+(numhash%360)+", 50%, 56%)"
             catColors[cat] = color;
             return color;
         },
@@ -77,11 +75,6 @@ export default {
             }
         },
 
-        /*
-        onView(e) {
-            if(e.type == "enter") this.show = true;
-        },
-        */
         addToken(token) {
             this.$emit("addToken", token);
         },
