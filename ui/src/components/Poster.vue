@@ -1,7 +1,8 @@
 <template>
 <div class="poster">
-    <h3 class="number"><b-badge variant="secondary">{{data.number}}</b-badge></h3>
-    <b-button variant="primary" size="sm" class="chatbutton" :class="{online: data.people>0}">
+    <h3 class="number"><b-badge variant="light">{{data.number}}</b-badge></h3>
+    <h4 class="demo" v-if="data.isDemo"><b-badge variant="danger">Software DEMO</b-badge></h4>
+    <b-button variant="primary" size="sm" class="chatbutton" :class="{online: data.people>0}" @click="openChat">
         Video Chat <span v-if="data.people>0"> ({{data.people}} people online)</span>
     </b-button> 
 
@@ -16,7 +17,7 @@
 
     <b-badge pill v-for="(cat, idx) in data.categories" :key="idx" 
         class="cat" 
-        :style="{backgroundColor: catColor(cat)}">{{cat}}&nbsp;
+        :style="{backgroundColor: catColor(cat)}">{{cat}}
     </b-badge>
     <br>
 
@@ -48,11 +49,23 @@ export default {
             let numhash = Math.abs(hash+120)%360;
             let color = "hsl("+(numhash%360)+", 50%, 55%)"
             catColors[cat] = color;
-            return color;
+        },
+    
+        openChat() {
+            let roomroute;
+            let name = "ohbm2020-"+this.data.number; //default
+            if(this.data.videochat) name = this.data.videochat; //user can override it to another jitsi name
+            if(this.data.videochat && this.data.videochat.startsWith("http")) {
+                //or use custom url
+                window.open(this.data.videochat, name);
+            } else {
+                window.open("#/room/"+this.data.number+"/"+name, name);
+            }
         },
     },
     data() {
         return {
+            //publicPath: process.env.BASE_URL
         }
     }
 }
@@ -72,12 +85,17 @@ export default {
     margin-bottom: 5px;
     position: relative;
 
-    font-size: 70%;
+    font-size: 80%;
 }
 .number {
 position: absolute;
-top: -1px;
-left: 2px;
+top: 0;
+right: 5px;
+}
+.demo {
+position: absolute;
+top: 0;
+left: 5px;
 }
 .pdf {
 margin-bottom: 0;
@@ -91,18 +109,20 @@ color: black;
 .presenter {
 font-weight: bold;
 color: black;
+font-size: 80%;
+}
+.inst {
+font-weight: bold;
+font-size: 80%;
 }
 .cat {
 margin-right: 5px;
 }
-.inst {
-font-weight: bold;
-}
 .authors {
 font-size: 80%;
+color: #666;
 }
 .author {
-color: #333;
 }
 .thumbnail {
 background-color: #eee; 
@@ -111,7 +131,7 @@ box-shadow: 1px 1px 2px #0001;
 .chatbutton {
 position: absolute;
 bottom: 10px;
-right: 10px;
+left: 10px;
 display: none;
 }
 .chatbutton.online, 
