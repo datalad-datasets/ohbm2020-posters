@@ -2,8 +2,11 @@
 <div>
     <b-container>
         <div class="header">
-            <a href="http://www.datalad.org" alt="DataLad website">
-                <img src="@/assets/img/datalad_logo.svg" align="right" width="100px">
+            <a href="https://brainlife.io">
+                <img src="@/assets/img/brainlife_logo2.png" align="right" width="75px" class="brainlifelogo"/>
+            </a>
+            <a href="http://www.datalad.org">
+                <img src="@/assets/img/datalad_logo.svg" align="right" width="75px">
             </a>
             <h1><b>OHBM2020 Posters</b></h1>
             <p>
@@ -218,6 +221,7 @@ export default {
 
 <style scoped>
 .header {
+margin-top: 20px;
 padding: 10px 0;
 color: #666;
 }
@@ -251,5 +255,13 @@ opacity: 0.5;
 .adsearch {
 font-size: 80%; 
 margin-top: 10px;
+}
+.brainlifelogo {
+background-color: #ddd;
+border-radius: 5px;
+padding: 5px;
+position: relative;
+top: -10px;
+margin-left: 10px;
 }
 </style>
