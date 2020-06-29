@@ -2,7 +2,6 @@
 <div class="poster" v-show="data.match">
     <div v-if="data.visible">
         <h3 class="number"><b-badge variant="light">{{data.number}}</b-badge></h3>
-        <h4 class="demo" v-if="data.isDemo"><b-badge variant="danger">Software DEMO</b-badge></h4>
         <b-button variant="primary" size="sm" class="chatbutton" :class="{online: data.people>0}" @click="openChat">
             Video Chat <span v-if="data.people>0"> ({{data.people}} people online)</span>
         </b-button> 
@@ -20,6 +19,7 @@
                 </div>
             </a>
         </p>
+        <b-badge variant="danger" v-if="data.isDemo">Software DEMO</b-badge>
         <span class="title"><i>{{data.title}}</i></span>
         <br>
 
@@ -176,25 +176,24 @@ border: 3px solid white;
 }
 .openpdflabel {
 position: absolute;
-top: 8px;
-left: 8px;
-font-size: 150%;
-font-weight: bold;
-color: #007bff;
-background-color: #fffa;
-padding: 2px 5px;
+top: 5px;
+left: 5px;
+color: white;
+background-color: #666;
+padding: 6px 8px;
+border-radius: 3px;
 display: none;
 }
 .poster:hover .thumbnail {
-border: 3px solid #007bff;
+border: 3px solid #0006;
 }
 .poster:hover .openpdflabel {
 display: block;
 }
 .chatbutton {
 position: absolute;
-bottom: 10px;
-left: 10px;
+top: 174px;
+left: 5px;
 display: none;
 }
 .chatbutton.online, 
