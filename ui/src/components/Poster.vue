@@ -1,41 +1,46 @@
 <template>
-<div class="poster">
-    <h3 class="number"><b-badge variant="light">{{data.number}}</b-badge></h3>
-    <h4 class="demo" v-if="data.isDemo"><b-badge variant="danger">Software DEMO</b-badge></h4>
-    <b-button variant="primary" size="sm" class="chatbutton" :class="{online: data.people>0}" @click="openChat">
-        Video Chat <span v-if="data.people>0"> ({{data.people}} people online)</span>
-    </b-button> 
+<div class="poster" v-show="data.match">
+    <div v-if="data.visible">
+        <h3 class="number"><b-badge variant="light">{{data.number}}</b-badge></h3>
+        <h4 class="demo" v-if="data.isDemo"><b-badge variant="danger">Software DEMO</b-badge></h4>
+        <b-button variant="primary" size="sm" class="chatbutton" :class="{online: data.people>0}" @click="openChat">
+            Video Chat <span v-if="data.people>0"> ({{data.people}} people online)</span>
+        </b-button> 
 
-    <p class="pdf">
-        <a :href="data.pdf" :target="'pdf_'+data.number">
-            <img v-lazy="$root.thumbsUrl+'/'+data.number+'.x200.jpg'" height="200px" class="thumbnail" 
-                data-error="$root.thumbsUrl+'/'+noposter.jpg"/>
-        </a>
-    </p>
-    <span class="title"><i>{{data.title}}</i></span>
-    <br>
+        <p class="pdf">
+            <a :href="data.pdf" :target="'pdf_'+data.number">
+                <img v-lazy="$root.thumbsUrl+'/'+data.number+'.x200.jpg'" height="200px" class="thumbnail" 
+                    data-error="$root.thumbsUrl+'/'+noposter.jpg"/>
+            </a>
+        </p>
+        <span class="title"><i>{{data.title}}</i></span>
+        <br>
 
-    <div v-for="(cat, idx) in data.categories" :key="idx" class="cat">
-        <span :style="{backgroundColor: catColor(cat)}" class="catbull">&nbsp;</span> {{cat}}
+        <div v-for="(cat, idx) in data.categories" :key="idx" class="cat">
+            <span :style="{backgroundColor: catColor(cat)}" class="catbull">&nbsp;</span> {{cat}}
+        </div>
+        <br>
+
+        <span class="presenter">{{data.presenter}}</span> |
+        <span class="inst">{{data.institution}}</span>
+        <br>
+
+        <div class="authors">
+            <span class="author" v-for="(author, idx) in data.authors" :key="idx">{{author}} <small style="opacity: 0.5">|</small>&nbsp;</span>
+        </div>
+        <br>
+
+        <span class="isdemo">{{data.isdemo}}</span>
+        <br>
     </div>
-    <br>
-
-    <span class="presenter">{{data.presenter}}</span> |
-    <span class="inst">{{data.institution}}</span>
-    <br>
-
-    <div class="authors">
-        <span class="author" v-for="(author, idx) in data.authors" :key="idx">{{author}} <small style="opacity: 0.5">|</small>&nbsp;</span>
-    </div>
-    <br>
-
-    <span class="isdemo">{{data.isdemo}}</span>
-    <br>
-
 </div>
 </template>
 
 <script>
+
+import Vue from 'vue'
+//import checkView from 'vue-check-view'
+//Vue.use(checkView)
 
 let catColors = {};
 
@@ -61,10 +66,15 @@ export default {
                 window.open("#/room/"+this.data.number+"/"+name, name);
             }
         },
+
+        /*
+        onView(e) {
+            if(e.type == "enter") this.show = true;
+        },
+        */
     },
     data() {
         return {
-            //publicPath: process.env.BASE_URL
         }
     }
 }
