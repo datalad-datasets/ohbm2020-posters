@@ -5003,7 +5003,30 @@
    "number": 1758
   },
   {
-   "number": 1759
+   "number": 1759,
+   "title": "ME-fMRI connectivity associations with behavior using group and individualized parcellation schemes",
+   "institution": "McGill University",
+   "presenter": "Roni Setton",
+   "categories": "Modeling and Analysis Methods<br>fMRI Connectivity and Network Modeling",
+   "videochat": "<a href=\"https://meet.jit.si/ohbm2020-1759\" target=\"_ohbm2020-1759\">jitsi:ohbm2020-1759</a>",
+   "pdf": "https://github.com/rsetton/misc/blob/master/OHBM_L%26R.pdf",
+   "authors": [
+    "Roni Setton",
+    "Laetitia Mwilambwe Tshilobo",
+    "Giulia Baracchini",
+    "Manesh Girn",
+    "Amber Lockrow",
+    "Jian Li",
+    "Tian Ge",
+    "Richard Leahy",
+    "Gary Turner",
+    "Nathan Spreng"
+   ],
+   "keywords": [
+    "cognition",
+    "functional mri"
+   ],
+   "software-demo": ""
   },
   {
    "number": 1760
