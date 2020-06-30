@@ -22,10 +22,10 @@ function feedbackAnimation(emoji) {
       elem.innerHTML = `<img class="emoji" src="/assets/images/emoji_brain_1f9e0.png" />`;
       break;
     case 'heart':
-        elem.innerHTML = `<img class="emoji" src="/assets/images/emoji_brain_1f9e0.png" />`;
+        elem.innerHTML = `<img class="emoji" src="/assets/images/emoji_smiling-face-with-smiling-eyes-and-three-hearts_1f970.png" />`;
       break;
     case 'rocket':
-        elem.innerHTML = `<img class="emoji" src="/assets/images/emoji_smiling-face-with-smiling-eyes-and-three-hearts_1f970.png" />`;
+        elem.innerHTML = `<img class="emoji" src="/assets/images/emoji_rocket_1f680" />`;
       break;
     default:
       elem.innerHTML = `<img class="emoji" src="/assets/images/emoji_rabbit_1f407.png" />`;
