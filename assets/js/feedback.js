@@ -14,7 +14,22 @@ function feedbackAnimationStep(timer, elem) {
 
 function feedbackAnimation(emoji) {
   const elem = document.createElement('div');
-  elem.innerText = emoji;
+  switch(emoji) {
+    case 'rabbit':
+      elem.innerHTML = `<img class="emoji" src="/assets/images/emoji_rabbit_1f407.png" />`;
+      break;
+    case 'brain':
+      elem.innerHTML = `<img class="emoji" src="/assets/images/emoji_brain_1f9e0.png" />`;
+      break;
+    case 'heart':
+        elem.innerHTML = `<img class="emoji" src="/assets/images/emoji_brain_1f9e0.png" />`;
+      break;
+    case 'rocket':
+        elem.innerHTML = `<img class="emoji" src="/assets/images/emoji_smiling-face-with-smiling-eyes-and-three-hearts_1f970.png" />`;
+      break;
+    default:
+      elem.innerHTML = `<img class="emoji" src="/assets/images/emoji_rabbit_1f407.png" />`;
+  }
   elem.classList.add("feedback");
   document.body.appendChild(elem);
   elem.style.left = window.innerWidth/2.0 + "px";

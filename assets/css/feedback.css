@@ -15,8 +15,14 @@
   margin: 10px;
   width: 48px;
   height: 48px;
-  font-size:38px;
+  /* font-size:38px; */
   cursor: pointer;
+}
+.tool img {
+  width: 38px;
+}
+.emoji {
+  width: 96px;
 }
 .feedback {
   position: absolute;
