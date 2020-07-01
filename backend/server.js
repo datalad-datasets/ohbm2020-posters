@@ -40,7 +40,7 @@ app.ws('/', function(ws, req) {
                 break;
             case "jit":
                 if(!ips[msg.id]) ips[msg.id] = [];
-                log("jit:", ip, msg.id);
+                log("jit:", ip, msg.id, msg.cid, msg.realCount);
                 entry = ips[msg.id].find(c=>c.ip==ip);
                 if(!entry) {
                     log("new ip", ip);
@@ -50,14 +50,19 @@ app.ws('/', function(ws, req) {
                     entry.date = new Date();
                 }
                 console.dir(ips[msg.id]);
-                counts[msg.id] = ips[msg.id].length;
-                broadcast({update: {id: msg.id, count: counts[msg.id]}});
+                let pcount = counts[msg.id];
+                if(msg.realCount) counts[msg.id] = msg.realCount;
+                else counts[msg.id] = ips[msg.id].length;
+                if(pcount != counts[msg.id]) {
+                    broadcast({update: {id: msg.id, count: counts[msg.id]}});
+                }
                 break;
             case "jitclose":
                 log("jitclose:", ip, msg.id);
                 if(!ips[msg.id]) ips[msg.id] = []; //did happen..
                 entry = ips[msg.id].find(c=>ip == ip);
                 ips[msg.id].splice(ips[msg.id].indexOf(entry), 1);
+                //if(msg.realCount) counts[msg.id] = msg.realCount;
                 counts[msg.id] = ips[msg.id].length;
                 broadcast({update: {id: msg.id, count: counts[msg.id]}});
                 if(counts[msg.id] == 0) delete counts[msg.id];
@@ -65,7 +70,7 @@ app.ws('/', function(ws, req) {
             }
         } catch (err) {
             console.error(err);
-        }
+            }
     });
 });
 

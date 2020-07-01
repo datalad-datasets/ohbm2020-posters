@@ -38,29 +38,27 @@ export default {
             }
         });
 
-        //we *really* want the counter to go down!
         this.api.addEventListener("videoConferenceLeft", this.sendClose);
-        this.api.addEventListener("readyToClose", this.sendClose);
         window.addEventListener("beforeunload", this.sendClose);
     },
     methods: {
         sendCount() {
-            console.log(this.number, this.cid, "current participants", this.api.getNumberOfParticipants());
+            let realCount = this.api.getNumberOfParticipants();
+            console.log(this.number, this.cid, "current participants", realCount);
             this.wss.send(JSON.stringify({
                 action: "jit", 
                 id: this.number, 
                 cid: this.cid, 
-                realCount: this.api.getNumberOfParticipants(),
+                realCount,
             }));
         },
 
         sendClose() {
-            console.log("closing!");
             clearInterval(this.timer);
             this.wss.send(JSON.stringify({
                 action: "jitclose", 
                 id: this.number, 
-                cid: this.cid
+                cid: this.cid,
             }));
         },
     },
