@@ -12,40 +12,57 @@ import Vue from 'vue'
 
 export default {
     props: [],
-    mounted() {
-        let id = this.$route.params.number;
-        let roomName = this.$route.params.name;
-        let cid = Math.random().toString(); //client id
-
-        let timer; //polling
-
-        if(!roomName) alert("no room name set in hash");
-        const api = new JitsiMeetExternalAPI("meet.jit.si", {
-            roomName,
-            parentNode: document.querySelector('#meet')
-        })
-        api.addEventListener("readyToClose", ()=>{
-            clearInterval(timer);
-            wss.send(JSON.stringify({action: "jitclose", id, cid}));
-        });
-        let wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
-        wss.onopen = () => {
-            wss.send(JSON.stringify({action: "jit", id, cid}));
-            timer = setInterval(()=>{
-                wss.send(JSON.stringify({action: "jit", id, cid}));
-            }, 1000*30);
-        }
-        window.addEventListener("beforeunload", function(evt) {
-            wss.send(JSON.stringify({action: "jitclose", id, cid}));
-        });
-
-    },
-    methods: {
-    },
     data() {
         return {
+            number: this.$route.params.number,
+            cid: null, //will use jitsi client id
+            wss: null, //websocket server connection
+            api: null, //jitsi api
+            timer: null, //for keepalive
         }
-    }
+    },
+    mounted() {
+        this.api = new JitsiMeetExternalAPI("meet.jit.si", {
+            roomName: this.$route.params.name,
+            parentNode: document.querySelector('#meet'),
+        })
+        this.api.addEventListener("videoConferenceJoined", e=>{
+            console.log("videoConferenceJoined .. starting keepalive");
+            console.dir(e);
+            this.cid = "datalad."+e.id; //let's use jitsi generated id
+
+            this.wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
+            this.wss.onopen = () => {
+                this.sendCount();
+                this.timer = setInterval(this.sendCount, 1000*30);
+            }
+        });
+
+        this.api.addEventListener("readyToClose", this.sendClose);
+        window.addEventListener("beforeunload", this.sendClose);
+    },
+    methods: {
+        sendCount() {
+            let realCount = this.api.getNumberOfParticipants();
+            console.log(this.number, this.cid, "current participants", realCount);
+            this.wss.send(JSON.stringify({
+                action: "jit", 
+                id: this.number, 
+                cid: this.cid, 
+                realCount,
+            }));
+        },
+
+        sendClose() {
+            clearInterval(this.timer);
+            this.wss.send(JSON.stringify({
+                action: "jitclose", 
+                id: this.number, 
+                cid: this.cid,
+            }));
+        },
+    },
+
 }
 
 </script>

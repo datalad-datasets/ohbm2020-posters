@@ -144,7 +144,12 @@ export default {
                 }
                 if(msg.update) {
                     let poster = this.posters.find(p=>p.number == msg.update.id);
+                    let prev = poster.people;
                     poster.people = msg.update.count;
+
+                    //might need to update show hide
+                    if(prev == 0 && poster.people > 0) this.applyFilter();
+                    if(prev > 0 && poster.people == 0) this.applyFilter();
                 }
             }
         });
@@ -204,7 +209,6 @@ export default {
                 let p = data.posters.find(p=>p.number == o.number);
                 Object.assign(p, o);
             });
-            //console.dir(data.posters);
 
             //clean up a bit
             data.posters.forEach(p=>{
@@ -233,6 +237,7 @@ export default {
             this.categories.sort();
 
             this.posters = data.posters;
+            //this.applyFilter(); //incase we decided to persist the search filter
             this.$nextTick(()=>{
                 this.checkVisibility();
             });
