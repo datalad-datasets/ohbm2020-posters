@@ -204,6 +204,7 @@ export default {
                 let p = data.posters.find(p=>p.number == o.number);
                 Object.assign(p, o);
             });
+            //console.dir(data.posters);
 
             //clean up a bit
             data.posters.forEach(p=>{
