@@ -1695,6 +1695,7 @@
   },
   {
    "number": 609
+    "pdf": "https://cdn-akamai.6connex.com//645/1827//Blostein_OHBM_subcortical_15922257151355198.pdf"
   },
   {
    "number": 610
@@ -1716,7 +1717,17 @@
   },
   {
    "number": 616,
-   "pdf": "https://cdn-akamai.6connex.com//645/1827//CarolinaMakowski_OHBMposter_2020_15920825008735477.pdf"
+   "title": "Heritability of Subcortical Structures Using a Twin and Non-Twin Sibling Design",
+   "pdf": "https://cdn-akamai.6connex.com//645/1827//CarolinaMakowski_OHBMposter_2020_15920825008735477.pdf",
+   "authors": [
+       "Nadia Blostein",
+       "Sejal Patel",
+       "Raihaan Patel",
+       "Stephanie Tullo",
+       "Eric Plitman",
+       "Saashi Bedford",
+       "Gabriel A. Devenyi",
+       "M. Mallar Chakravarty"
   },
   {
    "number": 617
