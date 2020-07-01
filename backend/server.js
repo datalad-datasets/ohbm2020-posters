@@ -49,6 +49,7 @@ app.ws('/', function(ws, req) {
                     log("exising ip");
                     entry.date = new Date();
                 }
+
                 console.dir(ips[msg.id]);
                 let pcount = counts[msg.id];
                 if(msg.realCount) counts[msg.id] = msg.realCount;
@@ -61,7 +62,9 @@ app.ws('/', function(ws, req) {
                 log("jitclose:", ip, msg.id);
                 if(!ips[msg.id]) ips[msg.id] = []; //did happen..
                 entry = ips[msg.id].find(c=>ip == ip);
-                ips[msg.id].splice(ips[msg.id].indexOf(entry), 1);
+                if(entry) ips[msg.id].splice(ips[msg.id].indexOf(entry), 1);
+                console.dir(ips[msg.id]);
+                    
                 //if(msg.realCount) counts[msg.id] = msg.realCount;
                 counts[msg.id] = ips[msg.id].length;
                 broadcast({update: {id: msg.id, count: counts[msg.id]}});
