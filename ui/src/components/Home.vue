@@ -223,6 +223,16 @@ export default {
 
                 p.match = true;
                 p.visible = false;
+
+                //switch 
+                //https://github.com/SarahMorgan/OHBM2020/raw/master/Poster147_OHBM2020.pdf
+                // to
+                //https://raw.githack.com/SarahMorgan/OHBM2020/master/Poster147_OHBM2020.pdf
+                //see https://github.com/datalad-datasets/ohbm2020-posters/pull/143
+                if(p.pdf && p.pdf.startsWith("https://github.com/") && p.pdf.includes("/raw/")) {
+                    p.pdf = p.pdf.replace("https://github.com/", "https://raw.githack.com/");
+                    p.pdf = p.pdf.replace("raw/master", "master");
+                }
             });
 
             //list all categories
