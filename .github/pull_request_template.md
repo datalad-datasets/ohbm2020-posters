@@ -1,3 +1,8 @@
+Checklist (common gotchas<!--, see also to be hidden HTML portion below-->)
+
+- [ ] I didn't paste fields I don't need changed
+- [ ] I didn't forget to add `,` in previous line (if you did, that is ok, add it and push 1 more commit)
+
 <!--
 
 Thanks for updating your poster entry! Here are some guidelines to ensure your PR can be
