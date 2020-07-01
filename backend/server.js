@@ -82,7 +82,7 @@ setInterval(()=>{
     for(let id in ips) {
         let recents = [];
         let recent = new Date();
-        recent.setTime(recent.getTime() - 1000*60*3);  
+        recent.setTime(recent.getTime() - 1000*30);  
         ips[id].forEach(rec=>{
             if(rec.date > recent) recents.push(rec);
         });
@@ -109,7 +109,7 @@ setInterval(()=>{
     fs.writeFileSync("/tmp/metrics.sensu", metrics);
     log("done maintenance");
 
-}, 1000*60*5);
+}, 1000*60);
 
 log("--------------------------------------------------------------------------");
 log("listening");
