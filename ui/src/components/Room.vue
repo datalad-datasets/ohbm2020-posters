@@ -12,55 +12,50 @@ import Vue from 'vue'
 
 export default {
     props: [],
+    data() {
+        return {
+            number: this.$route.params.number,
+            cid: null, //will use jitsi client id
+            wss: null, //websocket server connection
+            timer: null, //for keepalive
+        }
+    },
     mounted() {
-        let id = this.$route.params.number;
-        let roomName = this.$route.params.name;
-        let cid;// = Math.random().toString(); //client id
-
-        let timer; //polling
-        let wss;
-
-        if(!roomName) alert("no room name set in hash");
         const api = new JitsiMeetExternalAPI("meet.jit.si", {
-            roomName,
-            parentNode: document.querySelector('#meet')
+            roomName: this.$route.params.name,
+            parentNode: document.querySelector('#meet'),
         })
         api.addEventListener("videoConferenceJoined", e=>{
             console.log("videoConferenceJoined .. starting keepalive");
             console.dir(e);
-            cid = "datalad."+e.id; //let's use jitsi generated id
-            wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
-            wss.onopen = () => {
-                wss.send(JSON.stringify({action: "jit", id, cid}));
-                timer = setInterval(()=>{
+            this.cid = "datalad."+e.id; //let's use jitsi generated id
+
+            this.wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
+            this.wss.onopen = () => {
+                this.wss.send(JSON.stringify({action: "jit", id: this.number, cid: this.cid}));
+                this.timer = setInterval(()=>{
                     let people = api.getNumberOfParticipants(); //TODO - maybe we should report this?
-                    console.log(id, cid, "current participants", people);
-                    wss.send(JSON.stringify({action: "jit", id, cid}));
+                    console.log(this.number, this.cid, "current participants", people);
+                    this.wss.send(JSON.stringify({action: "jit", id: this.number, cid: this.cid}));
                 }, 1000*30);
             }
         });
         function sendClose() {
-            clearInterval(timer);
-            wss.send(JSON.stringify({action: "jitclose", id, cid}));
         }
 
         //we *really* want the counter to go down!
-        api.addEventListener("videoConferenceLeft", e=>{
-            this.close();
-        });
-        api.addEventListener("readyToClose", ()=>{
-            this.close();
-        });
-        window.addEventListener("beforeunload", function(evt) {
-            this.close();
-        });
+        api.addEventListener("videoConferenceLeft", this.sendClose);
+        api.addEventListener("readyToClose", this.sendClose);
+        window.addEventListener("beforeunload", this.sendClose);
     },
     methods: {
+        sendClose() {
+            console.log("closing!");
+            clearInterval(this.timer);
+            this.wss.send(JSON.stringify({action: "jitclose", id: this.number, cid: this.cid}));
+        },
     },
-    data() {
-        return {
-        }
-    }
+
 }
 
 </script>
