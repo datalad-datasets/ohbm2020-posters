@@ -1,0 +1,22 @@
+name: test
+
+on: [push, pull_request]
+
+jobs:
+  basic-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Test jsons
+      shell: bash
+      run: |
+        for f in *.json; do echo $f; python -c "import json; json.load(open('$f'))"; done
+    - name: Smoke test scripts
+      run: tools/make_page.py
+
