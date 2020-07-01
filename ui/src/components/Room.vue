@@ -17,24 +17,21 @@ export default {
         let roomName = this.$route.params.name;
         let cid = Math.random().toString(); //client id
 
+        let timer; //polling
+
         if(!roomName) alert("no room name set in hash");
         const api = new JitsiMeetExternalAPI("meet.jit.si", {
             roomName,
             parentNode: document.querySelector('#meet')
         })
-        /*
-        api.addListener("videoConferenceJoined", () => {
-             this.jitsiAPI.executeCommands({
-                  displayName: ["Soichi"],
-                  subject: ["test"]
-             })
+        api.addEventListener("readyToClose", ()=>{
+            clearInterval(timer);
+            wss.send(JSON.stringify({action: "jitclose", id, cid}));
         });
-        */
-
         let wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
         wss.onopen = () => {
             wss.send(JSON.stringify({action: "jit", id, cid}));
-            setInterval(()=>{
+            timer = setInterval(()=>{
                 wss.send(JSON.stringify({action: "jit", id, cid}));
             }, 1000*30);
         }
