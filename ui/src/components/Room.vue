@@ -38,7 +38,7 @@ export default {
             }
         });
 
-        this.api.addEventListener("videoConferenceLeft", this.sendClose);
+        this.api.addEventListener("readyToClose", this.sendClose);
         window.addEventListener("beforeunload", this.sendClose);
     },
     methods: {
