@@ -33,28 +33,27 @@ export default {
             wss.onopen = () => {
                 wss.send(JSON.stringify({action: "jit", id, cid}));
                 timer = setInterval(()=>{
-                    let people = api.getNumberOfParticipants();
+                    let people = api.getNumberOfParticipants(); //TODO - maybe we should report this?
                     console.log(id, cid, "current participants", people);
                     wss.send(JSON.stringify({action: "jit", id, cid}));
                 }, 1000*30);
             }
         });
-        api.addEventListener("videoConferenceLeft", e=>{
-            console.log("videoConferenceLeft");
-            console.dir(e);
+        function sendClose() {
             clearInterval(timer);
             wss.send(JSON.stringify({action: "jitclose", id, cid}));
-        });
+        }
 
-        /*
+        //we *really* want the counter to go down!
+        api.addEventListener("videoConferenceLeft", e=>{
+            this.close();
+        });
         api.addEventListener("readyToClose", ()=>{
-            clearInterval(timer);
-            wss.send(JSON.stringify({action: "jitclose", id, cid}));
+            this.close();
         });
         window.addEventListener("beforeunload", function(evt) {
-            wss.send(JSON.stringify({action: "jitclose", id, cid}));
+            this.close();
         });
-        */
     },
     methods: {
     },
