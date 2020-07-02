@@ -331,7 +331,7 @@ opacity: 0.4;
 }
 .search .searchicon {
 position: absolute;
-top: 39px;
+top: 37px;
 left: 22px;
 opacity: 0.2;
 }

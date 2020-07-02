@@ -1,6 +1,8 @@
 <template>
-<div class="room">
+<div class="room" :class="{showpad}">
     <div id="meet"/>
+    <iframe v-show="showpad" id="pad" :src="'https://etherpad.wikimedia.org/p/'+$route.params.name" frameBorder="0"/>
+    <div id="toggler" @click="togglePad">NOTE</div>
 </div>
 </template>
 
@@ -19,6 +21,8 @@ export default {
             wss: null, //websocket server connection
             api: null, //jitsi api
             timer: null, //for keepalive
+
+            showpad: true,
         }
     },
     mounted() {
@@ -42,6 +46,9 @@ export default {
         window.addEventListener("beforeunload", this.sendClose);
     },
     methods: {
+        togglePad() {
+            this.showpad = !this.showpad;
+        },
         sendCount() {
             let realCount = this.api.getNumberOfParticipants();
             console.log(this.number, this.cid, "current participants", realCount);
@@ -69,13 +76,44 @@ export default {
 
 <style scoped>
 .room {
+    height: 100%;
+}
+#meet {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
 }
-#meet {
+#pad {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 375px;
     height: 100%;
+    z-index: 3;
+}
+#toggler {
+    font-size: 95%;
+    position: fixed;
+    transform: rotate(-90deg);
+    padding: 2px 10px;
+    background-color: #eee;
+    top: 150px;
+    z-index: 2;
+    box-shadow: 0 0 3px #0003;
+    right: -20px;
+    font-weight: bold;
+}
+#toggler:hover {
+    background-color: white;
+    cursor: pointer;
+}
+.showpad #meet {
+    right: 375px;
+}
+.showpad #toggler {
+    right: 355px;
 }
 </style>
