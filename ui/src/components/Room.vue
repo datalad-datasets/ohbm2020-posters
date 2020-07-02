@@ -2,7 +2,10 @@
 <div class="room" :class="{showpad}">
     <div id="meet"/>
     <iframe v-show="showpad" id="pad" :src="'https://etherpad.wikimedia.org/p/'+$route.params.name" frameBorder="0"/>
-    <div id="toggler" @click="togglePad">NOTE</div>
+    <div id="toggler" @click="togglePad">NOTE 
+        <b-icon-arrow-down v-if="showpad"/>
+        <b-icon-arrow-up v-if="!showpad"/>
+    </div>
 </div>
 </template>
 
@@ -11,6 +14,8 @@
 import ReconnectingWebSocket from 'reconnecting-websocket';
 
 import Vue from 'vue'
+
+
 
 export default {
     props: [],
@@ -104,7 +109,7 @@ export default {
     top: 150px;
     z-index: 2;
     box-shadow: 0 0 3px #0003;
-    right: -20px;
+    right: -30px;
     font-weight: bold;
 }
 #toggler:hover {
@@ -115,6 +120,17 @@ export default {
     right: 375px;
 }
 .showpad #toggler {
-    right: 355px;
+    right: 347px;
+}
+
+@media screen and (max-width: 600px) {
+    #toggler,
+    #pad {
+        display: none;
+    }
+    .showpad #meet,
+    #meet {
+        right: 0;
+    }
 }
 </style>
