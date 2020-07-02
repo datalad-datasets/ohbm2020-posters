@@ -47,6 +47,7 @@ export default {
     },
     methods: {
         togglePad() {
+            console.log("togglepad");
             this.showpad = !this.showpad;
         },
         sendCount() {
