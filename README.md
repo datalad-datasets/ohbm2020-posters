@@ -77,6 +77,33 @@ Go to our website: [https://datalad-datasets.github.io/ohbm2020-posters/](https:
      Then, click on the green `Create pull request` button.<br><br>
      <img src="./img/datalad_OHBM2020Posters_8b.png" width="700"/>
 
+## Installation
+
+UI can be served directly on any static web servers such as nginx, apache, lite-server, or hosted services such as github pages, netlify, etc. `index.html` on gh-pages branch can be used as the entry point for the UI. `index.html` uses pre-built (webpacked) static content stored in `./static`
+
+To run the dev instance of the UI, please install npm, then run `npm run install`, then launch the dev UI by running `npm run dev`.
+
+The UI is currently hard-coded to use the test websocket backend server at `https://dev1.soichi.us/ohbm2020/`. If you'd like to run your own backend server, please run `backend/server.js`. You will normally want to persist this server via pm2, docker, or any other process management service. For example, if you want to use pm2, you can run
+
+```
+pm2 start backend/server.js --name gallop --watch
+```
+
+Server port number is currently hardcoded to 3000. Please adjust it if necessary. You can make this port accessible to all of your client instances, and/or you can proxy the server through your web server. For example, if you have nginx server running, you can expose the gallop server by adding something like the following.
+
+
+```
+    location /ohbm2020/ {
+        proxy_pass http://localhost:3000/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_read_timeout 300s;
+    }
+
+```
+
 ## ✨ Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
