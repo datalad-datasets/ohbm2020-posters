@@ -1,7 +1,7 @@
 <template>
 <div class="room" :class="{showpad}">
     <div id="meet"/>
-    <iframe v-show="showpad" id="pad" :src="'https://etherpad.wikimedia.org/p/'+$route.params.name" frameBorder="0"/>
+    <iframe v-show="showpad" id="pad" :src="'//etherpad.wikimedia.org/p/'+$route.params.name" frameBorder="0"/>
     <div id="toggler" @click="togglePad">NOTE 
         <b-icon-arrow-down v-if="showpad"/>
         <b-icon-arrow-up v-if="!showpad"/>
@@ -14,8 +14,6 @@
 import ReconnectingWebSocket from 'reconnecting-websocket';
 
 import Vue from 'vue'
-
-
 
 export default {
     props: [],
@@ -36,8 +34,6 @@ export default {
             parentNode: document.querySelector('#meet'),
         })
         this.api.addEventListener("videoConferenceJoined", e=>{
-            console.log("videoConferenceJoined .. starting keepalive");
-            console.dir(e);
             this.cid = "datalad."+e.id; //let's use jitsi generated id
 
             this.wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
@@ -52,12 +48,11 @@ export default {
     },
     methods: {
         togglePad() {
-            console.log("togglepad");
             this.showpad = !this.showpad;
         },
         sendCount() {
             let realCount = this.api.getNumberOfParticipants();
-            console.log(this.number, this.cid, "current participants", realCount);
+            //console.log(this.number, this.cid, "current participants", realCount);
             this.wss.send(JSON.stringify({
                 action: "jit", 
                 id: this.number, 
@@ -99,6 +94,7 @@ export default {
     width: 375px;
     height: 100%;
     z-index: 3;
+    background-color: gray;
 }
 #toggler {
     font-size: 95%;
