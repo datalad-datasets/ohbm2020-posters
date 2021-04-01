@@ -1,12 +1,49 @@
 <!doctype html>
 <html>
 <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
     <script src='https://meet.jit.si/external_api.js'></script>
-	<script type="text/javascript" charset="utf-8" src="assets/js/reconnecting-websocket.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="assets/js/reconnecting-websocket.min.js"></script>
+    <script src="assets/js/feedback.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/room.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/feedback.css">
 </head>
 <body>
     <div id="meet"/>
+
+    <div id="extras">
+        <div
+            class="tool"
+            onclick="feedback('rabbit')"
+        ><img
+            class="emoji"
+            src="/assets/images/emoji_rabbit_1f407.png"
+        /></div>
+        <div
+            class="tool"
+            onclick="feedback('brain')"
+        ><img
+            class="emoji"
+            src="/assets/images/emoji_brain_1f9e0.png"
+        /></div>
+        <div
+            class="tool"
+            onclick="feedback('hearts')"
+        ><img
+            class="emoji"
+            src="/assets/images/emoji_smiling-face-with-smiling-eyes-and-three-hearts_1f970.png"
+        /></div>
+        <div
+            class="tool"
+            onclick="feedback('rocket')"
+        ><img
+            class="emoji"
+            src="/assets/images/emoji_rocket_1f680.png"
+        />
+        </div>
+    </div>
+
     <script>
         let hash = location.hash.substring(1); //jitsi room name
         let id = hash.split(".")[0];
@@ -19,7 +56,9 @@
         const api = new JitsiMeetExternalAPI("meet.jit.si", {
             roomName,
             parentNode: document.querySelector('#meet')
-        })
+        });
+
+        addDataChannelListener();
 
         let wss = new ReconnectingWebSocket("wss://dev1.soichi.us/ohbm2020/");
         wss.onopen = () => {
