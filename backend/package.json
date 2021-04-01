@@ -18,7 +18,7 @@
   "homepage": "https://github.com/soichih/ohbm2020-posters#readme",
   "dependencies": {
     "async": "^3.2.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "express-ws": "^4.0.0",
     "reconnecting-websocket": "^4.4.0",
